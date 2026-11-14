@@ -255,7 +255,16 @@ public partial class MainWindow
     {
         if (_appDots.Count == 0) return;
         HashSet<string> running;
-        try { running = Process.GetProcesses().Select(p => p.ProcessName).ToHashSet(StringComparer.OrdinalIgnoreCase); }
+        try
+        {
+            running = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var p in Process.GetProcesses())
+            {
+                try { running.Add(p.ProcessName); }
+                catch { /* it closed just now */ }
+                finally { p.Dispose(); }   // every Process holds a handle: free it, this runs every 3 s
+            }
+        }
         catch { return; }
         foreach (var (dot, exe) in _appDots.Values)
         {

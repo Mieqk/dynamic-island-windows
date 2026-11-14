@@ -531,7 +531,7 @@ public partial class MainWindow
 
         var begin = TimeSpan.FromMilliseconds(delayMs);
         bool hop = _settings.Bouncy;
-        var spring = new SpringEase { DampingRatio = Liquid ? 0.68 : hop ? 0.7 : 0.86 };
+        var spring = new SpringEase { DampingRatio = Liquid ? 0.68 : hop ? 0.78 : 0.86 };
         var move = TimeSpan.FromMilliseconds((Liquid ? 520 : hop ? 500 : 420) * (_settings.FastAnimations ? 0.65 : 1));
         st.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(fromScale, 1, move) { BeginTime = begin, EasingFunction = spring });
         st.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(fromScale, 1, move) { BeginTime = begin, EasingFunction = spring });
@@ -547,9 +547,9 @@ public partial class MainWindow
         });
 
         // content comes into focus: soft first, sharp only at rest
-        var blur = new BlurEffect { Radius = 18, RenderingBias = RenderingBias.Performance };
+        var blur = new BlurEffect { Radius = 10, RenderingBias = RenderingBias.Performance };
         el.Effect = blur;
-        var unblur = new DoubleAnimation(18, 0, TimeSpan.FromMilliseconds(380))
+        var unblur = new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(300))
         {
             BeginTime = begin,
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },

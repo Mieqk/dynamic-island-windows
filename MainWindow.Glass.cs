@@ -307,7 +307,7 @@ public partial class MainWindow
 
     // ================================================================ header: page dots
 
-    private RadioButton[] PageTabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabCalendar, TabSystem];
+    private RadioButton[] PageTabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabCalendar, TabSystem, TabStats];
     private bool _iconsShown;
 
     private void UpdatePageDots()

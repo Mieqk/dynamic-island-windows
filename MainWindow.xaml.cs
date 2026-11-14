@@ -916,7 +916,7 @@ public partial class MainWindow : Window
     {
         GrowWindowFor(size);
         // calm mode: near-critical damping, the size glides without bouncing
-        _w.Damping = _h.Damping = Liquid ? 23 : _settings.Bouncy ? 25 : 31;   // "springy": a small overshoot
+        _w.Damping = _h.Damping = Liquid ? 23 : _settings.Bouncy ? 27 : 31;   // "springy": a small overshoot
         _w.Stiffness = _h.Stiffness = _settings.FastAnimations ? 560 : 340;
         _w.Target = size.Width;
         _h.Target = size.Height;
@@ -948,9 +948,9 @@ public partial class MainWindow : Window
         }
     }
 
-    private RadioButton[] Tabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabCalendar, TabSystem, TabSettings];
+    private RadioButton[] Tabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabCalendar, TabSystem, TabStats, TabSettings];
 
-    private FrameworkElement[] AllPages => [HomePage, MusicPage, WeatherPage, ChatPage, TimerPage, ClipPage, NotesPage, CalendarPage, SystemPage, SettingsPage];
+    private FrameworkElement[] AllPages => [HomePage, MusicPage, WeatherPage, ChatPage, TimerPage, ClipPage, NotesPage, CalendarPage, SystemPage, StatsPage, SettingsPage];
 
     private FrameworkElement CurrentPage
     {
@@ -1117,6 +1117,7 @@ public partial class MainWindow : Window
         else if (TabCalendar.IsChecked == true) RenderCalendar();
         else if (TabTimer.IsChecked == true) RenderTimer();
         else if (TabSystem.IsChecked == true) _ = RefreshSystemAsync(full: true);
+        else if (TabStats.IsChecked == true) RenderUsage();
         Remeasure();
     }
 

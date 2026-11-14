@@ -256,9 +256,18 @@ public partial class MainWindow
     private static void FocusApp(string app)
     {
         var token = app.Split(' ')[0];
-        var p = Process.GetProcesses().FirstOrDefault(x =>
-            x.MainWindowHandle != IntPtr.Zero && x.ProcessName.Contains(token, StringComparison.OrdinalIgnoreCase));
-        if (p != null) Native.SetForegroundWindow(p.MainWindowHandle);
+        IntPtr target = IntPtr.Zero;
+        foreach (var x in Process.GetProcesses())
+        {
+            try
+            {
+                if (target == IntPtr.Zero && x.MainWindowHandle != IntPtr.Zero &&
+                    x.ProcessName.Contains(token, StringComparison.OrdinalIgnoreCase)) target = x.MainWindowHandle;
+            }
+            catch { /* it closed just now */ }
+            finally { x.Dispose(); }
+        }
+        if (target != IntPtr.Zero) Native.SetForegroundWindow(target);
     }
 
     private void CheckCalendar()
