@@ -39,7 +39,7 @@ public sealed class Settings
     /// <summary>How strong the live waves are, 10…100.</summary>
     public int LiquidStrength { get; set; } = 60;
     /// <summary>Which creature lives in the pill (see CharacterView.All).</summary>
-    public string Character { get; set; } = "eyes";
+    public string Character { get; set; } = "none";
     /// <summary>Edge reaches for the cursor, breathes with music, glows on events.</summary>
     public bool Reactive { get; set; } = true;
     /// <summary>Orange light under the island while a Claude character is on.</summary>
@@ -55,6 +55,8 @@ public sealed class Settings
     public bool DiscordSidePill { get; set; } = true;
     /// <summary>The smart island: opens on what matters now, learns your habits, keeps quiet while you type.</summary>
     public bool SmartIsland { get; set; } = true;
+    /// <summary>Count the time in each app (names only, stored on this PC, see PRIVACY.md).</summary>
+    public bool UsageStats { get; set; } = true;
     /// <summary>How often each tab was used, per hour of the day (24 counts per tab). Stays on this PC.</summary>
     public Dictionary<string, int[]> TabHabits { get; set; } = [];
     /// <summary>Keep the island out of screenshots, recordings and screen sharing (Zoom, Discord, OBS).</summary>

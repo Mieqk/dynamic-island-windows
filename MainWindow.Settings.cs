@@ -137,7 +137,7 @@ public partial class MainWindow
                 if (_justDragged) return;
                 _settings.Character = id;
                 _settings.Save();
-                Character.Kind = id;
+                ApplyCharacter(id);
                 preview.Cheer();
                 SetupAura(); // Claude Code lights the island orange
                 HighlightCharacter();

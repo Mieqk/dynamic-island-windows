@@ -217,6 +217,7 @@ public partial class MainWindow
         if (_slowCount % 2 == 0 && _settings.MirrorNotifications) await PollNotificationsAsync();
         if (_slowCount % 900 == 0) _ = _calendar.RefreshAsync();
         TrackHabits();
+        TrackUsage();
         if (_slowCount % 30 == 1) WatchBattery();
         if (_slowCount % 30 == 0 && _settings.CaptureHidden == null)   // NVIDIA's recorder may start later
         {

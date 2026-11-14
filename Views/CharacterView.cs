@@ -19,13 +19,13 @@ public sealed class CharacterView : FrameworkElement
 {
     public static readonly (string Id, string Name)[] All =
     [
-        ("eyes", L.T("Глазки")), ("cat", L.T("Кот")), ("ghost", L.T("Призрак")), ("robot", L.T("Робот")),
+        ("none", L.T("Без персонажа")), ("eyes", L.T("Глазки")), ("cat", L.T("Кот")), ("ghost", L.T("Призрак")), ("robot", L.T("Робот")),
         ("fish", L.T("Рыбка")), ("planet", L.T("Планета")), ("slime", L.T("Слайм")), ("pulse", L.T("Пульс")),
         ("bunny", L.T("Зайчик")), ("owl", L.T("Сова")), ("dino", L.T("Дино")), ("star", L.T("Звёздочка")),
         ("cloud", L.T("Облачко")), ("claude", "Claude"), ("clawd", "Claude Code"),
     ];
 
-    public string Kind { get; set; } = "eyes";
+    public string Kind { get; set; } = "none";
     public CharacterMood Mood { get; set; } = CharacterMood.Idle;
     /// <summary>Where it looks: -1..1 on both axes.</summary>
     public double LookX { get; set; }
@@ -132,6 +132,7 @@ public sealed class CharacterView : FrameworkElement
 
     protected override void OnRender(DrawingContext dc)
     {
+        if (Kind == "none") return;   // no character: draw nothing
         _fg = TryFindResource("Fg") as Brush ?? Brushes.White;
         _dark = TryFindResource("PlayFg") as Brush ?? Brushes.Black;
         _accent = Tint is Color c ? new SolidColorBrush(c) : TryFindResource("Accent") as Brush ?? Brushes.LimeGreen;

@@ -52,10 +52,17 @@ public partial class MainWindow
         return (rec, finished.Task);
     }
 
+    /// <summary>Set the pill's character; "none" hides it so no empty gap is left in the pill.</summary>
+    private void ApplyCharacter(string id)
+    {
+        Character.Kind = id;
+        Character.Visibility = id == "none" ? Visibility.Collapsed : Visibility.Visible;
+    }
+
     private void UseCharacter(string id)
     {
         _settings.Character = id;
-        Character.Kind = id;
+        ApplyCharacter(id);
         SetupAura();
     }
 
