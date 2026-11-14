@@ -916,7 +916,7 @@ public partial class MainWindow : Window
     {
         GrowWindowFor(size);
         // calm mode: near-critical damping, the size glides without bouncing
-        _w.Damping = _h.Damping = Liquid ? 23 : _settings.Bouncy ? 25 : 31;   // "springy": a small overshoot
+        _w.Damping = _h.Damping = Liquid ? 23 : _settings.Bouncy ? 27 : 31;   // "springy": a small overshoot
         _w.Stiffness = _h.Stiffness = _settings.FastAnimations ? 560 : 340;
         _w.Target = size.Width;
         _h.Target = size.Height;
