@@ -97,7 +97,7 @@ public partial class MainWindow : Window
         if (snap >= 0 || promo >= 0 || review >= 0 || live >= 0 || args.Contains("--cover")) BeginDemo();
         if (live >= 0) StartLiveDemo(args.ElementAtOrDefault(live + 1) ?? "demo-commands.txt");
         ApplyThemeLocal();
-        Character.Kind = _settings.Character;
+        ApplyCharacter(_settings.Character);
         InitGlass();
         UpdateShape(false);
         InitHome();

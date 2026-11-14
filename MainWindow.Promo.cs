@@ -266,7 +266,7 @@ public partial class MainWindow
         Island.IsHitTestVisible = false;
         _settings.ExpandOnHover = false;
         _settings.Character = "eyes";
-        Character.Kind = "eyes";
+        ApplyCharacter("eyes");
         SetupAura();
         RenderPromoStills(folder);
         await Task.Delay(6000); // weather + layout
@@ -369,7 +369,7 @@ public partial class MainWindow
         _curTarget = Center(Island, 0.75, 1) + new Vector(30, 40);
         foreach (var id in new[] { "cat", "ghost", "bunny", "robot", "owl", "dino", "planet", "claude", "clawd", "eyes" })
         {
-            Character.Kind = id;
+            ApplyCharacter(id);
             _settings.Character = id;
             SetupAura();
             Character.Cheer();
@@ -388,7 +388,7 @@ public partial class MainWindow
 
         // 7. Claude Code with its laptop, in the open menu
         _settings.Character = "clawd";
-        Character.Kind = "clawd";
+        ApplyCharacter("clawd");
         SetupAura();
         _demoIdle = false;
         UpdateMediaUi();

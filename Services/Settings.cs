@@ -39,7 +39,7 @@ public sealed class Settings
     /// <summary>How strong the live waves are, 10…100.</summary>
     public int LiquidStrength { get; set; } = 60;
     /// <summary>Which creature lives in the pill (see CharacterView.All).</summary>
-    public string Character { get; set; } = "eyes";
+    public string Character { get; set; } = "none";
     /// <summary>Edge reaches for the cursor, breathes with music, glows on events.</summary>
     public bool Reactive { get; set; } = true;
     /// <summary>Orange light under the island while a Claude character is on.</summary>

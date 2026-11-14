@@ -108,7 +108,7 @@ public partial class MainWindow
         // every character, idle in the pill
         foreach (var (id, _) in Views.CharacterView.All)
         {
-            Character.Kind = id;
+            ApplyCharacter(id);
             _settings.Character = id;
             SetupAura();
             await Task.Delay(900);
@@ -124,7 +124,7 @@ public partial class MainWindow
         // the easter egg: all seven emotions, on the eyes and on Claude Code
         foreach (var kind in new[] { "eyes", "clawd" })
         {
-            Character.Kind = kind;
+            ApplyCharacter(kind);
             foreach (var emo in Enum.GetValues<Views.Emotion>().Skip(1))
             {
                 Character.Emote(emo);
@@ -133,7 +133,7 @@ public partial class MainWindow
             }
             await Task.Delay(2500);
         }
-        Character.Kind = _settings.Character;
+        ApplyCharacter(_settings.Character);
         _demoIdle = false;
         UpdateMediaUi();
 
