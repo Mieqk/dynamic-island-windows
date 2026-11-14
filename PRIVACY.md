@@ -3,6 +3,8 @@
 Atoll collects no personal data and has no telemetry or ads. Everything it keeps stays on your computer:
 settings and notes in `%APPDATA%\DynamicIsland`, chat logins and the error log in `%LOCALAPPDATA%\DynamicIsland`.
 
+**Usage statistics.** To show how long you spent in each app, Atoll notes which program is in front (the process name only, never window titles or what you type) about once a second, skipping time when you are away for 2 minutes or more. The totals per day are kept for 90 days in `%APPDATA%\DynamicIsland\usage.json`. They are never sent anywhere. You can switch this off or reset it in the settings, or delete the file.
+
 Atoll connects to the internet only for features you can see, and sends only what that feature needs:
 
 | Feature | Service | What is sent |
