@@ -950,6 +950,15 @@
               <ScrollViewer x:Name="SettingsScroll" Grid.Column="1" Margin="12,0,0,0" VerticalScrollBarVisibility="Hidden">
                 <Grid x:Name="SettingsSections">
                   <StackPanel Tag="Внешний вид|&#xE790;">
+                <Border x:Name="DedicationCard" Style="{StaticResource Tile}" Margin="0,0,0,10" Visibility="Collapsed">
+                  <StackPanel>
+                    <TextBlock Style="{StaticResource Caption}" Text="О ВЕРСИИ"/>
+                    <TextBlock x:Name="DedicationMessage" TextWrapping="Wrap" FontSize="13" LineHeight="19" Margin="0,8,0,0"/>
+                    <TextBlock x:Name="DedicationSignature" Style="{StaticResource Muted}" Margin="0,8,0,0"/>
+                    <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,10,0,0"
+                               Text="Основа — Atoll от Fuwni (лицензия MIT). Эта версия доработана специально для тебя."/>
+                  </StackPanel>
+                </Border>
                 <Border Style="{StaticResource Tile}" Margin="0,0,0,10">
                   <StackPanel>
                     <TextBlock Style="{StaticResource Caption}" Text="ТЕМЫ"/>

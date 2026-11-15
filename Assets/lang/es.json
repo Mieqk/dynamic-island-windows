@@ -571,5 +571,7 @@
  "Старый больше не работает: вставьте новый в расширение": "La anterior ya no funciona: pega la nueva en la extensión",
  "Сохранено в заметки": "Guardado en las notas",
  "LanguageTool · ошибок нет": "LanguageTool · sin errores",
- "LanguageTool · замечаний: {0}": "LanguageTool · {0} avisos"
+ "LanguageTool · замечаний: {0}": "LanguageTool · {0} avisos",
+ "О ВЕРСИИ": "SOBRE ESTA VERSIÓN",
+ "Основа — Atoll от Fuwni (лицензия MIT). Эта версия доработана специально для тебя.": "Basado en Atoll de Fuwni (licencia MIT). Esta versión está adaptada para ti."
 }

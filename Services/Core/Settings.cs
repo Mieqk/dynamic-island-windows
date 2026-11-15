@@ -62,6 +62,8 @@ public sealed class Settings
     public bool UsageStats { get; set; } = true;
     /// <summary>The browser extension may talk to the island (off until the user switches it on; see ExtensionBridge).</summary>
     public bool ExtensionEnabled { get; set; }
+    /// <summary>Which personal greetings were already shown ("first", "MM-dd/yyyy"); see Dedication.</summary>
+    public List<string> DedicationSeen { get; set; } = [];
     /// <summary>How often each tab was used, per hour of the day (24 counts per tab). Stays on this PC.</summary>
     public Dictionary<string, int[]> TabHabits { get; set; } = [];
     /// <summary>Keep the island out of screenshots, recordings and screen sharing (Zoom, Discord, OBS).</summary>
