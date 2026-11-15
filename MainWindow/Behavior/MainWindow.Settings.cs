@@ -116,6 +116,24 @@ public partial class MainWindow
         RefreshSettingsPage();
     }
 
+    private readonly HashSet<Views.CharacterView> _previewInView = [];
+
+    /// <summary>Which gallery characters are inside the visible part of the settings page right now.</summary>
+    private void RefreshPreviewViewport()
+    {
+        _previewInView.Clear();
+        foreach (var p in _previewCharacters)
+        {
+            if (!p.IsVisible) continue;
+            try
+            {
+                var r = p.TransformToAncestor(SettingsScroll).TransformBounds(new Rect(0, 0, p.ActualWidth, p.ActualHeight));
+                if (r.Bottom > -20 && r.Top < SettingsScroll.ViewportHeight + 20) _previewInView.Add(p);
+            }
+            catch { /* not in the tree yet */ }
+        }
+    }
+
     private void BuildCharacterGallery()
     {
         foreach (var (id, name) in Views.CharacterView.All)
