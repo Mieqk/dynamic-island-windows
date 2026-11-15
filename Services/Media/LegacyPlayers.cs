@@ -42,9 +42,9 @@ public static class LegacyPlayers
         // Yandex Music for Windows doesn't always report to Windows media controls: read its window title
         foreach (var name in YandexNames)
         {
-            foreach (var p in Process.GetProcessesByName(name))
+            foreach (var raw in ProcessUtil.WindowTitles(name))
             {
-                var title = p.MainWindowTitle.Trim();
+                var title = raw.Trim();
                 if (title.Length == 0 || YandexNames.Any(n => title.Equals(n, StringComparison.OrdinalIgnoreCase)) ||
                     title.StartsWith("Яндекс Музыка", StringComparison.OrdinalIgnoreCase) || title.StartsWith("Yandex Music", StringComparison.OrdinalIgnoreCase))
                     continue;
@@ -59,10 +59,10 @@ public static class LegacyPlayers
             }
         }
 
-        var aimp = Process.GetProcessesByName("AIMP").FirstOrDefault();
+        var aimp = ProcessUtil.WindowTitles("AIMP").FirstOrDefault();
         if (aimp != null)
         {
-            var title = aimp.MainWindowTitle.Trim();
+            var title = aimp.Trim();
             if (title.Length > 0 && !title.StartsWith("AIMP", StringComparison.OrdinalIgnoreCase))
             {
                 var (artist, song) = Split(title);

@@ -210,7 +210,7 @@ public partial class MainWindow
         // listing every process is not free: look for Discord every 3 s
         if (_slowCount % 3 == 0 || _discordInCall)
             _discordInCall = _audio.AppsRecording().Any(a => a.Contains("discord", StringComparison.OrdinalIgnoreCase)) &&
-                             Process.GetProcessesByName("Discord").Length > 0;
+                             ProcessUtil.IsRunning("Discord");
         _discordSpeaking = _discordInCall && _audio.AppState("discord").Peak > 0.03;
         if (_liveDemo) _discordInCall = _discordSpeaking = _demoDiscord;
 

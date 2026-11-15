@@ -374,7 +374,20 @@ dotnet publish -c Release -r win-x64 --self-contained true -o publish/DynamicIsl
 DynamicIsland.exe --snapshot docs/screenshots
 ```
 
-Устройство проекта и остальное — в [английском README](README.en.md#project-layout). Каждый push собирается в GitHub Actions — готовый архив во вкладке **Actions → артефакты**.
+Устройство проекта:
+
+```
+App.xaml, MainWindow.xaml(.cs)   остров: окно, цикл кадров, режимы
+MainWindow/Look/                 стекло, жидкий контур, темы, сезоны, персонаж
+MainWindow/Pages/                музыка, погода, чат, Claude Code, приложения, пункт управления, статистика…
+MainWindow/Behavior/             умный остров, живые активности, настройки, обновления, мост для приложений
+MainWindow/Showcase/             режимы демо и промо (скриншоты, видео)
+Views/                           персонажи, редактор скриншотов, выбор области и цвета
+Services/{Media,Capture,Agents,Info,Core,Platform}   логика без интерфейса, по темам
+Assets/, tools/i18n/, docs/      иконка и переводы, таблицы переводов, скриншоты и протокол моста
+```
+
+Подробнее — в [английском README](README.en.md#project-layout). Каждый push собирается в GitHub Actions — готовый архив во вкладке **Actions → артефакты**.
 
 ---
 

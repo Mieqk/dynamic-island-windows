@@ -325,14 +325,27 @@ DynamicIsland.exe --snapshot docs/screenshots
 ### Project layout
 
 ```
-App.xaml               styles and shared resources (dark / light theme)
-MainWindow.xaml        the island: compact view, notifications, all pages
-MainWindow.*.cs        logic in parts: Media, Weather, Actions, Chat, Live, Tools, Liquid, Glass,
-                       Command, TextShelf, Buddy, Settings, Claude, Demo
-Views/                 characters, screenshot editor, region picker / colour picker, chromatic effect
-Services/              music, weather, lyrics, capture and OCR, recording, calendar, notifications,
-                       clipboard, system load, Do Not Disturb, Claude Code hooks and bridge, safe link opening
-Assets/                icon and the Claude Code bridge script
+App.xaml                styles and shared resources (dark / light theme)
+MainWindow.xaml         the island: compact view, notifications, all pages
+MainWindow.xaml.cs      the window itself: frame loop, morphing, modes
+MainWindow/             the rest of the window's logic, one file per feature
+  Look/                 glass, liquid outline, themes, seasons, the buddy character
+  Pages/                music, weather, chat, Claude Code, apps, control centre, games, keyboard,
+                        text shelf, tools, actions, usage statistics
+  Behavior/             smart island, live activities, performance, command bar, settings,
+                        updates, hiding in apps, Discord pill, app bridge link
+  Showcase/             demo / promo / review modes that render screenshots and videos
+Views/                  characters, screenshot editor, region and colour picker, chromatic effect
+Services/               no UI, grouped by topic
+  Media/                music sessions, other players, lyrics, audio
+  Capture/              screenshots, OCR, screen recording
+  Agents/               Claude Code / Codex hooks and the local bridge (also for other apps)
+  Info/                 weather, calendar, notifications, downloads, headset battery
+  Core/                 settings, translations, log, theme, springs, timer, notes, usage stats
+  Platform/             Windows glue: system load, FPS, processes, shell, autostart, updates, privacy
+Assets/                 icon, translations (lang/*.json) and the Claude Code bridge script
+tools/i18n/             translation tables (strings*.tsv) and the script that builds Assets/lang
+docs/                   screenshots and the app-bridge protocol
 ```
 
 Every push is built by GitHub Actions; the ready zip is under **Actions → artifacts**.
