@@ -552,5 +552,12 @@
  "Статистика сброшена": "Statistics reset",
  "Время по приложениям начнётся заново": "Time per app starts over",
  "{0} ч {1} мин": "{0} h {1} min",
- "{0} с": "{0} s"
+ "{0} с": "{0} s",
+ "Загрузки": "Downloads",
+ "Сообщения": "Messages",
+ "Игровой режим": "Game mode",
+ "Звонок Discord": "Discord call",
+ "Другие приложения": "Other apps",
+ "ЧТО ПОКАЗЫВАТЬ НА ОСТРОВЕ": "WHAT THE ISLAND SHOWS",
+ "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Anything switched off won't appear in the pill or open the island by itself. A timer you start yourself still tells you when it ends."
 }

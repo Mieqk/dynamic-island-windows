@@ -41,9 +41,9 @@ public partial class MainWindow
             ShowToast("", title, text, () => OpenTab(TabTimer), (Brush)FindResource("Accent"), ms: 6000);
             RenderTimer();
         };
-        _downloads.Completed += path => ShowToast("", L.T("Загрузка завершена"), Path.GetFileName(path),
+        _downloads.Completed += path => { if (Shows("download")) ShowToast("", L.T("Загрузка завершена"), Path.GetFileName(path),
             () => Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{path}\"") { UseShellExecute = true }),
-            (Brush)FindResource("AccentBlue"), ms: 5000);
+            (Brush)FindResource("AccentBlue"), ms: 5000); };
 
         InitTimerPage();
         IcsBox.Text = _settings.CalendarIcs;
@@ -76,36 +76,37 @@ public partial class MainWindow
         var lives = new List<(string Id, string? Icon, string? Text, double Ring, Brush Brush)>();
         if (!_recording.IsRecording)   // recording owns the pill (red dot + elapsed, see OnTick)
         {
-            if (_gameMode && _stats.Last is { } gs)
+            if (Shows("game") && _gameMode && _stats.Last is { } gs)
                 lives.Add(("game", "\uE7FC", GameStatsText(gs), -1, ringBrush));
-            if (_timer.Active)
+            if (Shows("timer") && _timer.Active)
             {
                 var b = _timer.Kind == TimerKind.Pomodoro && !_timer.PomodoroWork ? (Brush)FindResource("AccentBlue") : ringBrush;
                 lives.Add(("timer", _timer.Kind == TimerKind.Stopwatch ? "\uE916" : _timer.Kind == TimerKind.Pomodoro ? "\uE7C1" : "\uE823",
                            _timer.Display + (_timer.Running ? "" : L.T(" · пауза")), _timer.Progress, b));
             }
-            foreach (var (id, text2, ring2) in AppLiveItems())
-                lives.Add((id, "\uE70B", text2, ring2, ringBrush));
-            if (FocusMode.IsOn)
+            if (Shows("apps"))
+                foreach (var (id, text2, ring2) in AppLiveItems())
+                    lives.Add((id, "\uE70B", text2, ring2, ringBrush));
+            if (Shows("focus") && FocusMode.IsOn)
             {
                 var left = FocusMode.Until!.Value - DateTime.Now;
                 lives.Add(("focus", "\uE708", L.F("Не беспокоить · {0}:{1:00}", (int)left.TotalMinutes, left.Seconds), -1,
                            new SolidColorBrush(Color.FromRgb(0x5E, 0x5C, 0xE6))));
             }
-            if (_discordInCall && !DiscordBeside)
+            if (Shows("discord") && _discordInCall && !DiscordBeside)
                 lives.Add(("discord", "\uE7F6",
                            _audio.MicMuted == true ? L.T("Discord · микрофон выкл") : _discordSpeaking ? L.T("Discord · говорят") : L.T("Discord · в канале"),
                            _discordSpeaking ? 1 : 0, new SolidColorBrush(Color.FromRgb(0x58, 0x65, 0xF2))));
-            if (_downloads.Current is { } d)
+            if (Shows("download") && _downloads.Current is { } d)
                 lives.Add(("download", "\uE896",
                            L.F("{0} · {1}/с", Shorten(d.Name, 22), DownloadWatcher.FormatBytes(d.BytesPerSecond)) + (d.Count > 1 ? L.F(" · ещё {0}", d.Count - 1) : ""),
                            (_tickCount % 8) / 8.0, (Brush)FindResource("AccentBlue")));
-            if (_soonEvent is { } ev)
+            if (Shows("event") && _soonEvent is { } ev)
             {
                 var mins = (int)Math.Ceiling((ev.Start - DateTime.Now).TotalMinutes);
                 lives.Add(("event", "\uE787", mins <= 0 ? L.F("Сейчас: {0}", Shorten(ev.Title, 26)) : L.F("{0} · через {1} мин", Shorten(ev.Title, 22), mins), -1, ringBrush));
             }
-            if (_lastMedia?.IsPlaying == true)
+            if (Shows("music") && _lastMedia?.IsPlaying == true)
             {
                 string? karaoke = _settings.Karaoke && _currentLyrics?.Synced == true && LyricCur.Text is { Length: > 0 } line && line != "♪" ? Shorten(line, 44) : null;
                 lives.Add(("music", null, karaoke, -1, ringBrush));   // the cover, the equaliser and the eyes
@@ -216,7 +217,7 @@ public partial class MainWindow
 
         CheckCalendar();
 
-        if (_slowCount % 2 == 0 && _settings.MirrorNotifications) await PollNotificationsAsync();
+        if (_slowCount % 2 == 0 && _settings.MirrorNotifications && Shows("messages")) await PollNotificationsAsync();
         if (_slowCount % 900 == 0) _ = _calendar.RefreshAsync();
         TrackHabits();
         TrackUsage();
@@ -274,6 +275,7 @@ public partial class MainWindow
 
     private void CheckCalendar()
     {
+        if (!Shows("event")) { _soonEvent = null; return; }
         var now = DateTime.Now;
         var upcoming = _calendar.Upcoming(1).Where(e => !e.AllDay).ToList();
         _soonEvent = upcoming.FirstOrDefault(e => e.Start - now <= TimeSpan.FromMinutes(15) && e.Start - now > TimeSpan.FromMinutes(-5));

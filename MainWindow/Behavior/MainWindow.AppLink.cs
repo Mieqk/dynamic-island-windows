@@ -29,7 +29,7 @@ public partial class MainWindow
 
     private void OnAppNotice(ClaudeBridge.AppNotice n)
     {
-        if (FocusMode.IsOn) return;   // quiet: do not disturb is on
+        if (!Shows("apps") || FocusMode.IsOn) return;   // switched off, or do not disturb is on
         var title = string.IsNullOrWhiteSpace(n.Title) ? n.App : n.Title;
         Action? click = n.Url == null ? null : () => { SafeShell.OpenUrl(n.Url); };
         WhenNotTyping(() => ShowToast("", title, n.Text, click, (Brush)FindResource("AccentBlue"), ms: 6000));
@@ -37,6 +37,7 @@ public partial class MainWindow
 
     private void OnAppActivity(ClaudeBridge.AppActivity a)
     {
+        if (!Shows("apps")) return;
         string key = (a.App + ":" + a.Id).ToLowerInvariant();
         if (a.Clear) { _appLive.Remove(key); return; }
         if (!_appLive.ContainsKey(key) && _appLive.Count >= MaxAppActivities) return;   // a runaway sender must not flood the pill
