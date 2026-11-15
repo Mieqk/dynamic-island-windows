@@ -84,6 +84,8 @@ public partial class MainWindow
                 lives.Add(("timer", _timer.Kind == TimerKind.Stopwatch ? "\uE916" : _timer.Kind == TimerKind.Pomodoro ? "\uE7C1" : "\uE823",
                            _timer.Display + (_timer.Running ? "" : L.T(" · пауза")), _timer.Progress, b));
             }
+            foreach (var (id, text2, ring2) in AppLiveItems())
+                lives.Add((id, "\uE70B", text2, ring2, ringBrush));
             if (FocusMode.IsOn)
             {
                 var left = FocusMode.Until!.Value - DateTime.Now;

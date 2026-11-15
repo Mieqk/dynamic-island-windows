@@ -66,11 +66,23 @@ public sealed class ClaudeBridge
 
     public sealed record Notice(string Kind, string Title, string Message, string Project, string Agent = "Claude Code");
 
+    /// <summary>A short message from another app (reminder, "done"…). <see cref="Url"/> is http(s) only; a click opens it in the browser.</summary>
+    public sealed record AppNotice(string App, string Title, string Text, string? Url);
+
+    /// <summary>
+    /// A live activity from another app shown in the compact pill (task progress, a rest timer…).
+    /// <see cref="Progress"/> 0…1 or -1 for no ring; <see cref="EndsAtMs"/> (unix ms, 0 = none) makes a countdown;
+    /// the activity disappears after <see cref="TtlSec"/> seconds unless it is sent again, or at once when <see cref="Clear"/>.
+    /// </summary>
+    public sealed record AppActivity(string App, string Id, string Text, double Progress, long EndsAtMs, double DurationSec, int TtlSec, bool Clear);
+
     private HttpListener? _listener;
 
     /// <summary>Raised on a background thread.</summary>
     public event Action<PermissionRequest>? PermissionRequested;
     public event Action<Notice>? Notified;
+    public event Action<AppNotice>? AppNoticed;
+    public event Action<AppActivity>? AppActivityChanged;
 
     public bool IsRunning => _listener?.IsListening == true;
 
@@ -158,6 +170,22 @@ public sealed class ClaudeBridge
                     finally { Interlocked.Decrement(ref _pending); }
                     break; // empty response = ask in the terminal as usual
                 }
+                case "/app/notify":
+                {
+                    var url = Str(json, "url", 500);
+                    AppNoticed?.Invoke(new AppNotice(Str(json, "app", 40) ?? "App", Str(json, "title", 80) ?? "", Str(json, "text", 200) ?? "",
+                        SafeShell.IsWebUrl(url) ? url : null));
+                    break;
+                }
+                case "/app/activity":
+                {
+                    var id = Str(json, "id", 40);
+                    if (string.IsNullOrWhiteSpace(id)) break;
+                    AppActivityChanged?.Invoke(new AppActivity(Str(json, "app", 40) ?? "App", id, Str(json, "text", 80) ?? "",
+                        Num(json, "progress", -1), (long)Num(json, "endsAt", 0), Num(json, "durationSec", 0),
+                        (int)Math.Clamp(Num(json, "ttlSec", 600), 5, 3600), json["clear"] is JsonValue c && c.TryGetValue<bool>(out var b) && b));
+                    break;
+                }
                 case "/notify":
                 {
                     var evt = json["hook_event_name"]?.GetValue<string>() ?? "";
@@ -188,6 +216,13 @@ public sealed class ClaudeBridge
         }
         catch { }
     }
+
+    /// <summary>A string field, cut to <paramref name="max"/> characters; null when absent or not a string.</summary>
+    private static string? Str(JsonObject o, string key, int max) =>
+        o[key] is JsonValue v && v.TryGetValue<string>(out var s) ? (s.Length > max ? s[..max] : s) : null;
+
+    private static double Num(JsonObject o, string key, double fallback) =>
+        o[key] is JsonValue v && v.TryGetValue<double>(out var d) && double.IsFinite(d) ? d : fallback;
 
     private static string Describe(string? tool, JsonNode? input)
     {
