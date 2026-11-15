@@ -20,6 +20,7 @@
 
 🎬 **[Видео-обзор оригинала за полторы минуты](https://github.com/Fuwni/dynamic-island-windows/releases/download/v1.2.0/dynamic-island-review-ru.mp4)** · 🌍 7 языков интерфейса
 
+[![Скачать](https://img.shields.io/github/v/release/Mieqk/dynamic-island-windows?label=%D0%A1%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C&style=for-the-badge&color=6FC3A1)](https://github.com/Mieqk/dynamic-island-windows/releases/latest)
 [![Сборка](https://img.shields.io/github/actions/workflow/status/Mieqk/dynamic-island-windows/build.yml?branch=main&label=%D0%A1%D0%B1%D0%BE%D1%80%D0%BA%D0%B0&style=for-the-badge&color=30D158)](https://github.com/Mieqk/dynamic-island-windows/actions)
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-0A84FF?style=for-the-badge&logo=windows)
 ![.NET 10](https://img.shields.io/badge/.NET-10-5E5CE6?style=for-the-badge&logo=dotnet)
@@ -210,12 +211,13 @@
 
 Права администратора не нужны.
 
-> **Эта версия** собирается в GitHub Actions: откройте [Actions](https://github.com/Mieqk/dynamic-island-windows/actions), последний зелёный запуск **Build** → блок *Artifacts* → **`DynamicIsland-setup`** (установщик) или **`DynamicIsland-win-x64`** (портативный архив).
+> **Эта версия** выходит в [Releases](https://github.com/Mieqk/dynamic-island-windows/releases/latest) этого форка: скачайте **`DynamicIsland-…-setup.exe`** (установщик) или `DynamicIsland-win-x64.zip` (портативная).
+> Свежие сборки между релизами лежат в [Actions](https://github.com/Mieqk/dynamic-island-windows/actions) (последний зелёный запуск **Build** → *Artifacts*).
 > Готовые релизы оригинала (без правок этой версии) лежат у [Fuwni](https://github.com/Fuwni/dynamic-island-windows/releases/latest).
 
 **Установщик (рекомендуется)**
 
-1. Скачайте **`DynamicIsland-…-setup.exe`** (из артефакта `DynamicIsland-setup` или из релизов оригинала).
+1. Скачайте **`DynamicIsland-…-setup.exe`** из [Releases](https://github.com/Mieqk/dynamic-island-windows/releases/latest).
 2. Запустите его. Он ставит программу только для вас (без прав администратора), добавляет её в меню «Пуск» и может включить автозапуск.
 3. Windows может показать синее окно **«Windows защитила ваш компьютер»**: программа не подписана платным сертификатом.
    Нажмите **«Подробнее» → «Выполнить в любом случае»**. Это нужно один раз.

@@ -2,6 +2,36 @@
 
 All notable changes to Atoll (formerly "Dynamic Island for Windows"). Русская версия каждого пункта — ниже английской.
 
+## 1.8.0 — 2026-11-15
+
+The first release of this fork (based on Atoll 1.7.0 by Fuwni, MIT): a calmer, quieter island with new tools.
+
+### Calmer by default
+- **No character by default** ("No character" in Settings → Character); all the other characters are still there.
+- **Quiet look**: the shimmering aura is off by default, the default accent is a soft mint (`#6FC3A1`) instead of bright green, and three quiet themes were added: **Sage**, **Haze** and **Linen**.
+- **Smoother**: the character gallery in Settings only animates what is on screen, and page changes no longer blur the big settings page; handles of polled processes are released.
+
+### New
+- **Usage statistics**: a new "Statistics" tab with the time spent in each app today (the process name only, never window titles; time while you are away is not counted). Everything stays on this PC; it can be switched off and reset.
+- **What the island shows** (Settings → Behavior): switch off any source — music, timer, Discord call, clipboard, downloads, calendar, game mode, Do Not Disturb, messages, other apps. Switched off means: not in the pill, no smart-island tab, no notice.
+- **App bridge**: other apps on this PC can show a notice or a live activity (progress ring, countdown) in the pill over the local token-protected bridge. Daily Note uses it for task progress, the rest timer and the daily reminder. Protocol: `docs/app-bridge.md`.
+- **Browser extension** (`extension/`, Chrome / Edge / Brave): check selected text with LanguageTool and save it to the island's notes. Off until switched on in Settings → Behavior; its own key and door; the island only receives notes and the issue count.
+- **A personal message**, kept out of the repository: a first-run greeting, an "about this version" card, a personal theme, a tray label and greetings on special dates from a local `dedication.json` (drop the file on the island or load it in Settings → Appearance). See `docs/dedication.md`.
+
+### Under the hood
+- Russian README by default (English in `README.en.md`); the code is laid out in folders (`MainWindow/{Look,Pages,Behavior,Showcase}`, `Services/{Media,Capture,Agents,Info,Core,Platform}`); new strings are translated into all six languages.
+- Pushing a `v*` tag now publishes the installer and the portable zip as a GitHub release.
+
+### По-русски
+- Первый релиз этого форка (основа — Atoll 1.7.0 от Fuwni, MIT): более спокойный остров с новыми инструментами.
+- По умолчанию без персонажа; подсветка выключена; мягкий мятный акцент вместо яркого зелёного; три спокойные темы: «Шалфей», «Дымка», «Лён».
+- Легче и плавнее: галерея персонажей оживляет только видимое, на странице настроек нет размытия при открытии.
+- Вкладка «Статистика»: время по приложениям за сегодня (только название программы, всё остаётся на ПК, можно выключить и сбросить).
+- «Что показывать на острове»: любой источник можно выключить (музыка, таймер, Discord, буфер, загрузки, календарь, игровой режим, «Не беспокоить», сообщения, другие приложения).
+- Мост для приложений (Daily Note показывает прогресс задач, таймер отдыха и напоминание) и расширение для браузера (проверка текста через LanguageTool и заметки на остров).
+- Личное послание из локального файла `dedication.json` (в репозитории его нет): перетащите файл на остров или загрузите в «Настройки → Внешний вид».
+- README на русском, файлы разложены по папкам, переводы на 6 языков. Тег `v*` теперь публикует релиз с установщиком и портативным архивом.
+
 ## 1.7.0 — 2026-11-14
 
 ### Seasons
