@@ -1533,7 +1533,7 @@ public partial class MainWindow : Window
                  : _claudeCurrent != null ? Views.CharacterMood.Think
                  : playing ? Views.CharacterMood.Music : Views.CharacterMood.Idle;
 
-        void Drive(Views.CharacterView ch, Views.CharacterMood? moodOverride = null)
+        void Drive(Views.CharacterView ch, Views.CharacterMood? moodOverride = null, bool nearOnly = false)
         {
             if (!ch.IsVisible) return;
             if (!_charCenters.TryGetValue(ch, out var cached) || _gazeTicks - cached.Tick > 15 || _rendering)
@@ -1543,8 +1543,12 @@ public partial class MainWindow : Window
                 _charCenters[ch] = cached;
             }
             var c = cached.Center;
-            ch.LookX = Math.Clamp((cursor.X - c.X) / 170.0, -1, 1);
-            ch.LookY = Math.Clamp((cursor.Y - c.Y) / 170.0, -1, 1);
+            double dx = cursor.X - c.X, dy = cursor.Y - c.Y;
+            // the gallery shows 16 characters: only the one near the cursor follows it, the rest rest
+            // (a character that keeps changing its gaze is redrawn 30 times a second)
+            if (nearOnly && dx * dx + dy * dy > 120.0 * 120.0) dx = dy = 0;
+            ch.LookX = Math.Clamp(dx / 170.0, -1, 1);
+            ch.LookY = Math.Clamp(dy / 170.0, -1, 1);
             ch.Beat = beat;
             ch.Mood = moodOverride ?? mood;
             ch.Tint = _albumColor;
@@ -1579,7 +1583,12 @@ public partial class MainWindow : Window
         if (_mode == Mode.Expanded && TabMusic.IsChecked == true) UpdateMusicWave(gazeDt);
         UpdateAuraMood(mood == Views.CharacterMood.Think);
         if (_mode == Mode.Expanded && TabSettings.IsChecked == true)
-            foreach (var preview in _previewCharacters) Drive(preview);
+        {
+            // only the cards on screen are alive (those scrolled out of the view would redraw for nothing)
+            if (_gazeTicks % 8 == 0) RefreshPreviewViewport();
+            foreach (var preview in _previewCharacters)
+                if (_previewInView.Contains(preview)) Drive(preview, nearOnly: true);
+        }
 
         UpdateReach(cursor);
     }

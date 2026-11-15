@@ -546,7 +546,9 @@ public partial class MainWindow
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
         });
 
-        // content comes into focus: soft first, sharp only at rest
+        // content comes into focus: soft first, sharp only at rest. The island is a see-through (layered) window,
+        // where a blur is computed on the CPU: so not in light mode and not on the big settings page.
+        if (Lite || el == SettingsPage || el == SettingsSections) return;
         var blur = new BlurEffect { Radius = 10, RenderingBias = RenderingBias.Performance };
         el.Effect = blur;
         var unblur = new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(300))
