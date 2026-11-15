@@ -83,7 +83,7 @@ public sealed class Settings
     /// <summary>Lower half of the island fades to see-through.</summary>
     public bool BottomFade { get; set; } = true;
     /// <summary>Shimmering colour along the lower edge when idle: none, aurora, sunset, ocean, neon, mono.</summary>
-    public string Aura { get; set; } = "aurora";
+    public string Aura { get; set; } = "none";
     /// <summary>Panels land with a small springy hop.</summary>
     public bool Bouncy { get; set; } = true;
     public bool FastAnimations { get; set; }
