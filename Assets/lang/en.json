@@ -559,5 +559,17 @@
  "Звонок Discord": "Discord call",
  "Другие приложения": "Other apps",
  "ЧТО ПОКАЗЫВАТЬ НА ОСТРОВЕ": "WHAT THE ISLAND SHOWS",
- "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Anything switched off won't appear in the pill or open the island by itself. A timer you start yourself still tells you when it ends."
+ "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Anything switched off won't appear in the pill or open the island by itself. A timer you start yourself still tells you when it ends.",
+ "РАСШИРЕНИЕ ДЛЯ БРАУЗЕРА": "BROWSER EXTENSION",
+ "Разрешить расширению браузера связываться с островом": "Let the browser extension talk to the island",
+ "Расширение сохраняет выделенный текст в заметки и показывает на острове результат проверки LanguageTool. Выключено, пока вы не включите. Связь только с этим ПК и только по вашему ключу.": "The extension saves selected text to the notes and shows the LanguageTool check result on the island. Off until you turn it on. It talks only to this PC and only with your key.",
+ "Скопировать ключ": "Copy key",
+ "Новый ключ": "New key",
+ "Ключ скопирован": "Key copied",
+ "Вставьте его в настройки расширения": "Paste it into the extension's settings",
+ "Новый ключ создан": "New key created",
+ "Старый больше не работает: вставьте новый в расширение": "The old one no longer works: paste the new one into the extension",
+ "Сохранено в заметки": "Saved to notes",
+ "LanguageTool · ошибок нет": "LanguageTool · no issues",
+ "LanguageTool · замечаний: {0}": "LanguageTool · {0} issues"
 }

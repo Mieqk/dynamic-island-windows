@@ -16,6 +16,7 @@ public partial class MainWindow
         _bridge.PermissionRequested += req => Dispatcher.BeginInvoke(() => EnqueuePermission(req));
         _bridge.Notified += n => Dispatcher.BeginInvoke(() => OnClaudeNotice(n));
         InitAppLink();
+        InitExtension();
         _bridge.Start();
         ClaudeHooks.RefreshScript();
         FillChatProviders();

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><title>Atoll</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<main class="wide">
+  <h1 id="title"></h1>
+
+  <label for="key" id="keyLabel"></label>
+  <input id="key" type="password" autocomplete="off" spellcheck="false">
+  <div class="help" id="keyHelp"></div>
+
+  <label for="server" id="serverLabel"></label>
+  <input id="server" type="url" spellcheck="false">
+  <div class="help" id="serverHelp"></div>
+
+  <label for="lang" id="langLabel"></label>
+  <select id="lang"></select>
+
+  <div class="row"><button id="save" class="primary"></button></div>
+  <div id="status" class="status"></div>
+  <div class="help" id="privacy"></div>
+</main>
+<script type="module" src="src/options.js"></script>
+</body>
+</html>

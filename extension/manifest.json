@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "0.1.0",
+  "default_locale": "ru",
+  "minimum_chrome_version": "110",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "action": { "default_popup": "popup.html", "default_title": "__MSG_extName__" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "permissions": ["storage", "contextMenus", "activeTab", "scripting"],
+  "host_permissions": ["http://localhost:47811/*", "https://api.languagetool.org/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "commands": {
+    "check-selection": { "suggested_key": { "default": "Alt+Shift+L" }, "description": "__MSG_cmdCheck__" },
+    "save-note": { "suggested_key": { "default": "Alt+Shift+N" }, "description": "__MSG_cmdNote__" }
+  }
+}

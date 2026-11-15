@@ -86,6 +86,9 @@ public sealed class ClaudeBridge
 
     public bool IsRunning => _listener?.IsListening == true;
 
+    /// <summary>The browser extension's route (/ext/*): see <see cref="ExtensionBridge"/>.</summary>
+    public ExtensionBridge Extension { get; } = new();
+
     public void Start()
     {
         try
@@ -116,6 +119,12 @@ public sealed class ClaudeBridge
     private async Task HandleAsync(HttpListenerContext ctx)
     {
         string response = "";
+        if (ctx.Request.Url?.AbsolutePath.StartsWith("/ext/", StringComparison.Ordinal) == true)
+        {
+            // the extension always sends an Origin, which the checks below would refuse: it has its own door
+            try { await Extension.HandleAsync(ctx); } catch { try { ctx.Response.Abort(); } catch { } }
+            return;
+        }
         if (!IsTrusted(ctx.Request))
         {
             try { ctx.Response.StatusCode = 403; ctx.Response.Close(); } catch { }

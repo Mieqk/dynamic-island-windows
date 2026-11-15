@@ -1157,6 +1157,19 @@
                 </Border>
                 <Border Style="{StaticResource Tile}" Margin="0,0,0,10">
                   <StackPanel>
+                    <TextBlock Style="{StaticResource Caption}" Text="РАСШИРЕНИЕ ДЛЯ БРАУЗЕРА"/>
+                    <CheckBox x:Name="ExtSwitch" Style="{StaticResource Switch}" Margin="0,8,0,0" Click="ExtSwitch_Click"
+                              Content="Разрешить расширению браузера связываться с островом"/>
+                    <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,-4,0,8"
+                               Text="Расширение сохраняет выделенный текст в заметки и показывает на острове результат проверки LanguageTool. Выключено, пока вы не включите. Связь только с этим ПК и только по вашему ключу."/>
+                    <StackPanel Orientation="Horizontal">
+                      <Button Style="{StaticResource GhostPill}" Padding="12,6" Margin="0,0,8,0" Content="Скопировать ключ" Click="ExtCopyKey_Click"/>
+                      <Button Style="{StaticResource GhostPill}" Padding="12,6" Content="Новый ключ" Click="ExtNewKey_Click"/>
+                    </StackPanel>
+                  </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Tile}" Margin="0,0,0,10">
+                  <StackPanel>
                     <CheckBox x:Name="HoverSwitch" Style="{StaticResource Switch}" Click="Behavior_Click" Content="Раскрывать при наведении"/>
                     <CheckBox x:Name="SmartSwitch" Style="{StaticResource Switch}" Click="Behavior_Click" Content="Умный остров"/>
                     <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,-4,0,6"
