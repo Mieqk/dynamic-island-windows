@@ -33,7 +33,7 @@ public sealed class Dedication
     public string VersionLabel { get; set; } = "";
     public List<SpecialDate> SpecialDates { get; set; } = [];
 
-    public static Dedication? Current { get; } = Load();
+    public static Dedication? Current { get; private set; } = Load();
 
     private static IEnumerable<string> Places()
     {
@@ -44,18 +44,45 @@ public sealed class Dedication
     private static Dedication? Load()
     {
         foreach (var path in Places())
-        {
-            try
-            {
-                if (!File.Exists(path)) continue;
-                var d = JsonSerializer.Deserialize<Dedication>(File.ReadAllText(path), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                if (d == null || (d.Title.Length == 0 && d.Message.Length == 0 && d.Toast.Length == 0)) continue;
-                d.SpecialDates ??= [];
-                return d;
-            }
-            catch { /* a broken file is simply not used */ }
-        }
+            if (Read(path) is { } d) return d;
         return null;
+    }
+
+    /// <summary>The file as a dedication, or null when it is missing, broken or has no words in it.</summary>
+    private static Dedication? Read(string path)
+    {
+        try
+        {
+            if (!File.Exists(path)) return null;
+            var d = JsonSerializer.Deserialize<Dedication>(File.ReadAllText(path), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            if (d == null || (d.Title.Length == 0 && d.Message.Length == 0 && d.Toast.Length == 0)) return null;
+            d.SpecialDates ??= [];
+            return d;
+        }
+        catch { return null; }   // a broken file is simply not used
+    }
+
+    /// <summary>A file the user dropped on the island: "dedication.json", or what a browser makes of it ("dedication (1).json").</summary>
+    public static bool LooksLikeDedicationFile(string path)
+    {
+        var name = Path.GetFileName(path);
+        return name.StartsWith("dedication", StringComparison.OrdinalIgnoreCase) && name.EndsWith(".json", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>Takes the file in: checks it, keeps a copy in %APPDATA%\DynamicIsland and starts using it at once.</summary>
+    public static bool Import(string path)
+    {
+        var d = Read(path);
+        if (d == null) return false;
+        try
+        {
+            var target = Places().First();
+            Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+            if (!string.Equals(Path.GetFullPath(path), Path.GetFullPath(target), StringComparison.OrdinalIgnoreCase)) File.Copy(path, target, true);
+        }
+        catch { return false; }
+        Current = d;
+        return true;
     }
 
     /// <summary>The special date that is today, if any.</summary>
