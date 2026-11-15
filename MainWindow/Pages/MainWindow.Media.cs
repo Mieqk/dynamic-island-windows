@@ -96,7 +96,7 @@ public partial class MainWindow
             {
                 Kick(3.5); // new track
                 Character.Cheer();
-                PulseGlow(_albumColor ?? Color.FromRgb(0x30, 0xD1, 0x58));
+                PulseGlow(_albumColor ?? Color.FromRgb(0x6F, 0xC3, 0xA1));
             }
             _lyricsKey = key;
             _currentLyrics = null;

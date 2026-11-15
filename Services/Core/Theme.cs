@@ -20,7 +20,7 @@ public static class Theme
         var island = Parse(islandHex) ?? Colors.Black;
         byte a = (byte)Math.Round(Math.Clamp(glass, 0.4, 1) * 255);
         var r = Application.Current.Resources;
-        r["Accent"] = Solid(accentHex.Length > 0 && Parse(accentHex) is Color ac ? ac : Color.FromRgb(0x30, 0xD1, 0x58));
+        r["Accent"] = Solid(accentHex.Length > 0 && Parse(accentHex) is Color ac ? ac : Color.FromRgb(0x6F, 0xC3, 0xA1));   // the calm default accent (the old iOS green lives on in the "Полночь" theme)
 
         if (dark)
         {
