@@ -966,6 +966,7 @@
                     <WrapPanel Margin="0,2,0,0">
                       <Button Style="{StaticResource GhostPill}" Padding="12,6" Margin="0,0,8,6" Click="ThemeStore_Click" Content="Галерея тем из интернета"/>
                       <Button Style="{StaticResource GhostPill}" Padding="12,6" Margin="0,0,8,6" Click="Photo_Click" Content="Своё фото…"/>
+                      <Button Style="{StaticResource GhostPill}" Padding="12,6" Margin="0,0,8,6" Click="Dedication_Click" Content="Загрузить послание…"/>
                       <Button x:Name="PhotoRemoveButton" Style="{StaticResource GhostPill}" Padding="12,6" Margin="0,0,8,6" Click="PhotoRemove_Click"
                               Content="Убрать фото" Visibility="Collapsed"/>
                     </WrapPanel>

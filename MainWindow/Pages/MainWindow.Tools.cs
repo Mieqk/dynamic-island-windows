@@ -436,6 +436,14 @@ public partial class MainWindow
     {
         if (e.Data.GetData(DataFormats.FileDrop) is not string[] files || files.Length == 0) return;
         e.Handled = true;
+        if (files.Length == 1 && Dedication.LooksLikeDedicationFile(files[0]))
+        {
+            // the personal message: no file actions, just take it in
+            _dropped = [];
+            if (_mode == Mode.Drop) SetMode(Mode.Compact);
+            ImportDedication(files[0]);
+            return;
+        }
         if (_mode == Mode.Expanded && HomeApps.IsVisible)
         {
             if (OverApps(e)) { AddApps(files); return; }

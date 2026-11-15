@@ -573,5 +573,7 @@
  "LanguageTool · ошибок нет": "LanguageTool · keine Fehler",
  "LanguageTool · замечаний: {0}": "LanguageTool · {0} Hinweise",
  "О ВЕРСИИ": "ÜBER DIESE VERSION",
- "Основа — Atoll от Fuwni (лицензия MIT). Эта версия доработана специально для тебя.": "Basiert auf Atoll von Fuwni (MIT-Lizenz). Diese Version ist für Sie angepasst."
+ "Основа — Atoll от Fuwni (лицензия MIT). Эта версия доработана специально для тебя.": "Basiert auf Atoll von Fuwni (MIT-Lizenz). Diese Version ist für Sie angepasst.",
+ "Загрузить послание…": "Nachricht laden…",
+ "Это не похоже на файл послания": "Das sieht nicht nach einer Nachrichtendatei aus"
 }

@@ -1682,7 +1682,7 @@ public partial class MainWindow : Window
         _tray = new Forms.NotifyIcon
         {
             Icon = new System.Drawing.Icon(iconStream, Forms.SystemInformation.SmallIconSize),
-            Text = Services.Dedication.Current is { VersionLabel.Length: > 0 } dd ? dd.VersionLabel : "Atoll",
+            Text = TrayText(),
             Visible = true,
             ContextMenuStrip = new Forms.ContextMenuStrip(),
         };

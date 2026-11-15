@@ -11,7 +11,37 @@ public partial class MainWindow
     private static ThemePreset? DedicationTheme() =>
         Dedication.Current is { ThemeName.Length: > 0 } d ? new ThemePreset("dedication", d.ThemeName, true, "#2A1A22", "#E8A0B4", "none") : null;
 
-    private async void InitDedication()
+    private void InitDedication() => _ = ApplyDedicationAsync(4000);
+
+    /// <summary>The tray tooltip (Windows allows at most 63 characters).</summary>
+    private static string TrayText()
+    {
+        var label = Dedication.Current?.VersionLabel;
+        return string.IsNullOrWhiteSpace(label) ? "Atoll" : label.Length > 63 ? label[..63] : label;
+    }
+
+    /// <summary>A dedication.json dropped on the island or picked in Settings: take it in and show the greeting right away.</summary>
+    private void ImportDedication(string path)
+    {
+        if (!Dedication.Import(path))
+        {
+            ShowToast("", L.T("Не получилось"), L.T("Это не похоже на файл послания"));
+            return;
+        }
+        _settings.DedicationSeen.Clear();   // the greeting is shown again for the new words
+        _settings.Save();
+        BuildThemeGallery();                // her theme appears
+        if (_tray != null) _tray.Text = TrayText();
+        _ = ApplyDedicationAsync(600);
+    }
+
+    private void Dedication_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new Microsoft.Win32.OpenFileDialog { Filter = "JSON (*.json)|*.json", Title = L.T("Загрузить послание…") };
+        if (dialog.ShowDialog() == true) ImportDedication(dialog.FileName);
+    }
+
+    private async Task ApplyDedicationAsync(int delayMs)
     {
         if (Dedication.Current is not { } d) return;
 
@@ -24,7 +54,7 @@ public partial class MainWindow
             DedicationCard.Visibility = Visibility.Visible;
         }
 
-        await Task.Delay(4000);   // let the island settle first
+        await Task.Delay(delayMs);   // let the island settle first
         if (_demoMedia != null || _liveDemo) return;
 
         // a special date wins over the first-run greeting; each is shown once (a date once a year)
