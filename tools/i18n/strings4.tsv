@@ -1,0 +1,18 @@
+ru	en	uk	es	de	pt	zh
+Шалфей	Sage	Шавлія	Salvia	Salbei	Sálvia	鼠尾草
+Дымка	Haze	Серпанок	Bruma	Dunst	Névoa	薄雾
+Лён	Linen	Льон	Lino	Leinen	Linho	亚麻
+Без персонажа	No character	Без персонажа	Sin personaje	Kein Charakter	Sem personagem	无角色
+Статистика	Statistics	Статистика	Estadísticas	Statistik	Estatísticas	统计
+СЕГОДНЯ ПО ПРИЛОЖЕНИЯМ	TODAY BY APP	СЬОГОДНІ ЗА ЗАСТОСУНКАМИ	HOY POR APLICACIÓN	HEUTE NACH APP	HOJE POR APLICATIVO	今日应用用时
+Считается только название программы, без заголовков окон. Данные хранятся на этом ПК и никуда не отправляются. Время, пока вы отошли, не учитывается.	Only the program name is counted, never window titles. The data stays on this PC and is never sent anywhere. Time while you are away is not counted.	Враховується лише назва програми, без заголовків вікон. Дані зберігаються на цьому ПК і нікуди не надсилаються. Час, поки вас немає, не враховується.	Solo se cuenta el nombre del programa, nunca los títulos de las ventanas. Los datos se quedan en este PC y no se envían a ningún sitio. El tiempo en que estás ausente no se cuenta.	Gezählt wird nur der Programmname, nie Fenstertitel. Die Daten bleiben auf diesem PC und werden nirgendwohin gesendet. Zeit, in der Sie weg sind, zählt nicht.	Só o nome do programa é contado, nunca os títulos das janelas. Os dados ficam neste PC e não são enviados a lugar nenhum. O tempo em que você está ausente não é contado.	仅统计程序名称，不记录窗口标题。数据保存在此电脑上，不会发送到任何地方。您离开期间的时间不计入。
+Сбросить статистику	Reset statistics	Скинути статистику	Restablecer estadísticas	Statistik zurücksetzen	Redefinir estatísticas	重置统计
+Выключить учёт	Turn tracking off	Вимкнути облік	Desactivar el registro	Erfassung ausschalten	Desativar o registro	关闭统计
+Включить учёт	Turn tracking on	Увімкнути облік	Activar el registro	Erfassung einschalten	Ativar o registro	开启统计
+Всего: {0}	Total: {0}	Усього: {0}	Total: {0}	Gesamt: {0}	Total: {0}	总计：{0}
+Учёт выключен.	Tracking is off.	Облік вимкнено.	El registro está desactivado.	Die Erfassung ist ausgeschaltet.	O registro está desativado.	统计已关闭。
+Пока нет данных. Поработайте за компьютером, и здесь появится время по программам.	No data yet. Use your computer for a while and the time per program will show up here.	Поки немає даних. Попрацюйте за комп’ютером, і тут з’явиться час за програмами.	Aún no hay datos. Usa el ordenador un rato y aquí aparecerá el tiempo por programa.	Noch keine Daten. Arbeiten Sie eine Weile am Computer, dann erscheint hier die Zeit pro Programm.	Ainda não há dados. Use o computador um pouco e o tempo por programa aparecerá aqui.	暂无数据。使用一会儿电脑，这里就会显示各程序的用时。
+Статистика сброшена	Statistics reset	Статистику скинуто	Estadísticas restablecidas	Statistik zurückgesetzt	Estatísticas redefinidas	统计已重置
+Время по приложениям начнётся заново	Time per app starts over	Час за застосунками почнеться заново	El tiempo por aplicación empieza de nuevo	Die Zeit pro App beginnt von vorn	O tempo por aplicativo recomeça	各应用用时将重新开始
+{0} ч {1} мин	{0} h {1} min	{0} год {1} хв	{0} h {1} min	{0} Std. {1} Min.	{0} h {1} min	{0} 小时 {1} 分钟
+{0} с	{0} s	{0} с	{0} s	{0} s	{0} s	{0} 秒
