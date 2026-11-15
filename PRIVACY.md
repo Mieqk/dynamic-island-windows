@@ -5,6 +5,8 @@ settings and notes in `%APPDATA%\DynamicIsland`, chat logins and the error log i
 
 **Usage statistics.** To show how long you spent in each app, Atoll notes which program is in front (the process name only, never window titles or what you type) about once a second, skipping time when you are away for 2 minutes or more. The totals per day are kept for 90 days in `%APPDATA%\DynamicIsland\usage.json`. They are never sent anywhere. You can switch this off or reset it in the settings, or delete the file.
 
+**Browser extension (optional).** If you install the extension from the `extension/` folder and switch the link on in Settings, it can send the island notes you save and the number of issues of a text check, over `localhost` only. The check itself is done by the LanguageTool server you choose in the extension (by default the public `api.languagetool.org`, which receives the selected text only when you press "Check"); Atoll never sees that traffic.
+
 Atoll connects to the internet only for features you can see, and sends only what that feature needs:
 
 | Feature | Service | What is sent |

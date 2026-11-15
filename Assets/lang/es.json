@@ -559,5 +559,17 @@
  "Звонок Discord": "Llamada de Discord",
  "Другие приложения": "Otras aplicaciones",
  "ЧТО ПОКАЗЫВАТЬ НА ОСТРОВЕ": "QUÉ MUESTRA LA ISLA",
- "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Lo desactivado no aparecerá en la píldora ni abrirá la isla solo. Un temporizador que inicies tú sigue avisando al terminar."
+ "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Lo desactivado no aparecerá en la píldora ni abrirá la isla solo. Un temporizador que inicies tú sigue avisando al terminar.",
+ "РАСШИРЕНИЕ ДЛЯ БРАУЗЕРА": "EXTENSIÓN DEL NAVEGADOR",
+ "Разрешить расширению браузера связываться с островом": "Permitir que la extensión del navegador hable con la isla",
+ "Расширение сохраняет выделенный текст в заметки и показывает на острове результат проверки LanguageTool. Выключено, пока вы не включите. Связь только с этим ПК и только по вашему ключу.": "La extensión guarda el texto seleccionado en las notas y muestra en la isla el resultado de LanguageTool. Está desactivada hasta que la actives. Habla solo con este PC y solo con tu clave.",
+ "Скопировать ключ": "Copiar clave",
+ "Новый ключ": "Nueva clave",
+ "Ключ скопирован": "Clave copiada",
+ "Вставьте его в настройки расширения": "Pégala en los ajustes de la extensión",
+ "Новый ключ создан": "Nueva clave creada",
+ "Старый больше не работает: вставьте новый в расширение": "La anterior ya no funciona: pega la nueva en la extensión",
+ "Сохранено в заметки": "Guardado en las notas",
+ "LanguageTool · ошибок нет": "LanguageTool · sin errores",
+ "LanguageTool · замечаний: {0}": "LanguageTool · {0} avisos"
 }

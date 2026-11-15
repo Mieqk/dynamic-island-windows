@@ -212,6 +212,7 @@ public partial class MainWindow
         GameStatsSwitch.IsChecked = _settings.GameStats;
         LockSwitch.IsChecked = _settings.LockPosition;
         SmartSwitch.IsChecked = _settings.SmartIsland;
+        ExtSwitch.IsChecked = _settings.ExtensionEnabled;
         FillHideAppPicker();
         CapsSwitch.IsChecked = _settings.ShowCapsLock;
         LayoutSwitch.IsChecked = _settings.ShowKeyboardLayout;

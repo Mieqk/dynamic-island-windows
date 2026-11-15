@@ -60,6 +60,8 @@ public sealed class Settings
     public bool ShowsSource(string id) => !HiddenSources.Contains(id);
     /// <summary>Count the time in each app (names only, stored on this PC, see PRIVACY.md).</summary>
     public bool UsageStats { get; set; } = true;
+    /// <summary>The browser extension may talk to the island (off until the user switches it on; see ExtensionBridge).</summary>
+    public bool ExtensionEnabled { get; set; }
     /// <summary>How often each tab was used, per hour of the day (24 counts per tab). Stays on this PC.</summary>
     public Dictionary<string, int[]> TabHabits { get; set; } = [];
     /// <summary>Keep the island out of screenshots, recordings and screen sharing (Zoom, Discord, OBS).</summary>
