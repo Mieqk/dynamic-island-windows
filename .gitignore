@@ -20,3 +20,6 @@ Desktop.ini
 
 # machine-specific recording helpers
 tools/review2/
+
+# personal greeting (see docs/dedication.md): never commit it
+dedication.json

@@ -102,6 +102,7 @@ public partial class MainWindow : Window
         UpdateShape(false);
         InitHome();
         InitSettingsPage();
+        InitDedication();
         InitBuddyReactions();
         InitUpdates();
         InitControlCenter();
@@ -1681,7 +1682,7 @@ public partial class MainWindow : Window
         _tray = new Forms.NotifyIcon
         {
             Icon = new System.Drawing.Icon(iconStream, Forms.SystemInformation.SmallIconSize),
-            Text = "Atoll",
+            Text = Services.Dedication.Current is { VersionLabel.Length: > 0 } dd ? dd.VersionLabel : "Atoll",
             Visible = true,
             ContextMenuStrip = new Forms.ContextMenuStrip(),
         };

@@ -50,6 +50,7 @@ public partial class MainWindow
     private void BuildThemeGallery()
     {
         ThemeGallery.Children.Clear();
+        if (DedicationTheme() is { } mine) ThemeGallery.Children.Add(ThemeCard(mine, mine.Name));   // her own theme comes first
         foreach (var t in BuiltInThemes) ThemeGallery.Children.Add(ThemeCard(t, L.T(t.Name)));
         PhotoRemoveButton.Visibility = _settings.IslandPhoto ? Visibility.Visible : Visibility.Collapsed;
     }
