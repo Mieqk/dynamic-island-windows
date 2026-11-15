@@ -36,6 +36,10 @@ public partial class MainWindow
         new("sand", "Песок", false, "#8A6A3B", "#D97706", "none"),
         new("mint", "Мята", false, "#2F7D62", "#10B981", "none"),
         new("sky", "Небо", false, "#2B5C8A", "#3B82F6", "ocean"),
+        // quiet ones: muted colours, no shimmer
+        new("sage", "Шалфей", true, "#1A211C", "#9DB58F", "none"),
+        new("mist", "Туман", true, "#151B24", "#8FA9C7", "none"),
+        new("linen", "Лён", false, "#7A6F63", "#8C6A4F", "none"),
     ];
 
     private const string ThemeStoreUrl = "https://raw.githubusercontent.com/Fuwni/dynamic-island-windows/main/themes/themes.json";
