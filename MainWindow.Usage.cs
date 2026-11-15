@@ -19,7 +19,7 @@ public partial class MainWindow
     }
 
     private static string Fmt(TimeSpan t) =>
-        t.TotalHours >= 1 ? $"{(int)t.TotalHours} ч {t.Minutes} мин" : t.TotalMinutes >= 1 ? $"{t.Minutes} мин" : $"{(int)t.TotalSeconds} с";
+        t.TotalHours >= 1 ? L.F("{0} ч {1} мин", (int)t.TotalHours, t.Minutes) : t.TotalMinutes >= 1 ? L.F("{0} мин", t.Minutes) : L.F("{0} с", (int)t.TotalSeconds);
 
     /// <summary>Fill the "Статистика" tab: the top apps today, each with a bar relative to the longest.</summary>
     private void RenderUsage()
@@ -27,7 +27,7 @@ public partial class MainWindow
         StatsToggle.Content = _settings.UsageStats ? L.T("Выключить учёт") : L.T("Включить учёт");
         StatsList.Children.Clear();
         var top = _usage.Top(8);
-        StatsTotal.Text = L.T("Всего: ") + Fmt(_usage.Total());
+        StatsTotal.Text = L.F("Всего: {0}", Fmt(_usage.Total()));
         StatsEmpty.Text = !_settings.UsageStats ? L.T("Учёт выключен.") : top.Count == 0 ? L.T("Пока нет данных. Поработайте за компьютером, и здесь появится время по программам.") : "";
         StatsEmpty.Visibility = StatsEmpty.Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 

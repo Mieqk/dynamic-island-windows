@@ -38,7 +38,7 @@ public partial class MainWindow
         new("sky", "Небо", false, "#2B5C8A", "#3B82F6", "ocean"),
         // quiet ones: muted colours, no shimmer
         new("sage", "Шалфей", true, "#1A211C", "#9DB58F", "none"),
-        new("mist", "Туман", true, "#151B24", "#8FA9C7", "none"),
+        new("mist", "Дымка", true, "#151B24", "#8FA9C7", "none"),
         new("linen", "Лён", false, "#7A6F63", "#8C6A4F", "none"),
     ];
 
