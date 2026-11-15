@@ -37,10 +37,10 @@ public partial class MainWindow
         void Add(RadioButton t, double s) => score[t] = score.GetValueOrDefault(t) + s;
 
         // what's going on right now
-        if (_timer.Active) Add(TabTimer, _timer.Running ? 3.2 : 2.2);
-        if (_discordInCall) Add(TabSystem, 2.4);
-        if ((DateTime.Now - _copiedAt).TotalSeconds < 25) Add(TabClip, 2.6);
-        if (_lastMedia?.IsPlaying == true) Add(TabMusic, 1.4);
+        if (Shows("timer") && _timer.Active) Add(TabTimer, _timer.Running ? 3.2 : 2.2);
+        if (Shows("discord") && _discordInCall) Add(TabSystem, 2.4);
+        if (Shows("clip") && (DateTime.Now - _copiedAt).TotalSeconds < 25) Add(TabClip, 2.6);
+        if (Shows("music") && _lastMedia?.IsPlaying == true) Add(TabMusic, 1.4);
 
         // habits: the tabs opened most at this hour (and the hours around it)
         int h = DateTime.Now.Hour;
@@ -55,7 +55,7 @@ public partial class MainWindow
         }
         if (total >= 6)   // enough to go on
             foreach (var (name, v) in habit)
-                if (PageTabs.FirstOrDefault(t => t.Name == name) is { } tab) Add(tab, 2.0 * v / total);
+                if (PageTabs.FirstOrDefault(t => t.Name == name) is { } tab && TabAllowed(tab)) Add(tab, 2.0 * v / total);
 
         if (score.Count == 0) return null;
         var best = score.MaxBy(kv => kv.Value);

@@ -552,5 +552,12 @@
  "Статистика сброшена": "Statistik zurückgesetzt",
  "Время по приложениям начнётся заново": "Die Zeit pro App beginnt von vorn",
  "{0} ч {1} мин": "{0} Std. {1} Min.",
- "{0} с": "{0} s"
+ "{0} с": "{0} s",
+ "Загрузки": "Downloads",
+ "Сообщения": "Nachrichten",
+ "Игровой режим": "Spielmodus",
+ "Звонок Discord": "Discord-Anruf",
+ "Другие приложения": "Andere Apps",
+ "ЧТО ПОКАЗЫВАТЬ НА ОСТРОВЕ": "WAS DIE INSEL ZEIGT",
+ "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "Ausgeschaltetes erscheint nicht in der Pille und öffnet die Insel nicht von selbst. Ein selbst gestarteter Timer meldet sein Ende trotzdem."
 }

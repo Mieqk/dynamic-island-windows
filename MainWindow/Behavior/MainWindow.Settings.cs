@@ -113,6 +113,7 @@ public partial class MainWindow
         BuildCharacterGallery();
         BuildSettingsNav();
         BuildAuraChips();
+        BuildSourceChips();
         RefreshSettingsPage();
     }
 

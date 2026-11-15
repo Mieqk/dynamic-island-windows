@@ -552,5 +552,12 @@
  "Статистика сброшена": "Estatísticas redefinidas",
  "Время по приложениям начнётся заново": "O tempo por aplicativo recomeça",
  "{0} ч {1} мин": "{0} h {1} min",
- "{0} с": "{0} s"
+ "{0} с": "{0} s",
+ "Загрузки": "Downloads",
+ "Сообщения": "Mensagens",
+ "Игровой режим": "Modo jogo",
+ "Звонок Discord": "Chamada do Discord",
+ "Другие приложения": "Outros aplicativos",
+ "ЧТО ПОКАЗЫВАТЬ НА ОСТРОВЕ": "O QUE A ILHA MOSTRA",
+ "Выключенное не появится в пилюле и не откроет остров само. Таймер, который вы запустили сами, всё равно сообщит о конце.": "O que estiver desligado não aparece na pílula nem abre a ilha sozinho. Um temporizador iniciado por você ainda avisa quando termina."
 }

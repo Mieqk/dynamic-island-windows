@@ -27,7 +27,7 @@ public partial class MainWindow
     /// <summary>Every 250 ms (from UpdateLive): show, update or hide the call island.</summary>
     private void UpdateDiscordPill()
     {
-        bool want = _discordInCall && DiscordBeside && !_hidden && !_fullscreenHidden && !_recording.IsRecording && IsLoaded;
+        bool want = Shows("discord") && _discordInCall && DiscordBeside && !_hidden && !_fullscreenHidden && !_recording.IsRecording && IsLoaded;
         // the call's length counts from when the call started, not from when the little island last appeared
         if (_discordInCall && !_callWasOn) _callSince = DateTime.Now;
         _callWasOn = _discordInCall;

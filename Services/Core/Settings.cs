@@ -55,6 +55,9 @@ public sealed class Settings
     public bool DiscordSidePill { get; set; } = true;
     /// <summary>The smart island: opens on what matters now, learns your habits, keeps quiet while you type.</summary>
     public bool SmartIsland { get; set; } = true;
+    /// <summary>Sources the user switched off (what the island shows): music, timer, discord, clip, download, event, game, focus, messages, apps. Empty = everything.</summary>
+    public List<string> HiddenSources { get; set; } = [];
+    public bool ShowsSource(string id) => !HiddenSources.Contains(id);
     /// <summary>Count the time in each app (names only, stored on this PC, see PRIVACY.md).</summary>
     public bool UsageStats { get; set; } = true;
     /// <summary>How often each tab was used, per hour of the day (24 counts per tab). Stays on this PC.</summary>
