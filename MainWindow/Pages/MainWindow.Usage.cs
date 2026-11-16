@@ -35,8 +35,26 @@ public partial class MainWindow
         // watching a film full screen: no keyboard or mouse for a long time, but it is still time at the screen
         bool watching = _lastMedia?.IsPlaying == true && _hwnd != IntPtr.Zero && Native.IsFullscreenAppActive(_hwnd);
         _usage.Tick(watching);
+        SuggestBreak(watching);
         // the open tab refreshes itself now and then (not while the cursor is over it: a click must land where it was aimed)
         if (_mode == Mode.Expanded && TabStats.IsChecked == true && _slowCount % 10 == 0 && !StatsBody.IsMouseOver) RenderUsage();
+    }
+
+    /// <summary>
+    /// "Time for a break": once per chosen interval of the current stretch. Never over a film, a game, a recording,
+    /// Do Not Disturb or a hidden island (the suggestion then simply waits), and never in the middle of typing.
+    /// </summary>
+    private void SuggestBreak(bool watching)
+    {
+        int every = _settings.BreakReminderMinutes;
+        if (every <= 0 || watching || FocusMode.IsOn || _fullscreenHidden || _gameMode || _hidden || _recording.IsRecording) return;
+        var now = DateTime.Now;
+        if (!_usage.BreakDue(now, TimeSpan.FromMinutes(every))) return;
+
+        var stretch = _usage.CurrentStretch(now);
+        WhenNotTyping(() => ShowToast("", L.T("Пора сделать перерыв"),
+            L.F("Вы за компьютером уже {0} без перерыва. Отдохните пару минут.", Fmt(stretch)),
+            () => OpenTab(TabStats), (Brush)FindResource("Accent"), ms: 9000));
     }
 
     private static string Fmt(TimeSpan t) =>
@@ -187,8 +205,31 @@ public partial class MainWindow
         RenderUsage();
     }
 
+    private bool _breakSync;
+
+    /// <summary>The "remind me to rest" chips: off, 30, 50, 90 minutes.</summary>
+    private void SyncBreakChips()
+    {
+        _breakSync = true;
+        foreach (var (chip, minutes) in new[] { (BreakOff, 0), (Break30, 30), (Break50, 50), (Break90, 90) })
+        {
+            chip.Tag = minutes;
+            chip.Content = minutes == 0 ? L.T("Выкл") : L.F("{0} мин", minutes);
+            chip.IsChecked = _settings.BreakReminderMinutes == minutes;
+        }
+        _breakSync = false;
+    }
+
+    private void BreakEvery_Checked(object sender, RoutedEventArgs e)
+    {
+        if (_breakSync || sender is not RadioButton { Tag: int minutes }) return;
+        _settings.BreakReminderMinutes = minutes;
+        _settings.Save();
+    }
+
     private void RenderUsage()
     {
+        SyncBreakChips();
         StatsToggle.Content = _settings.UsageStats ? L.T("Выключить учёт") : L.T("Включить учёт");
         StatsBody.Children.Clear();
         bool any = _statsWeek ? RenderUsageWeek() : RenderUsageDay();
@@ -208,6 +249,8 @@ public partial class MainWindow
         var facts = new List<string>();
         if (day.First is { } first && day.Last is { } last) facts.Add(L.F("с {0} до {1}", Clock(first), Clock(last)));
         if (day.LongestStretch.TotalMinutes >= 1) facts.Add(L.F("дольше всего без перерыва: {0}", Fmt(day.LongestStretch)));
+        var current = _usage.CurrentStretch(DateTime.Now);
+        if (current.TotalMinutes >= 5) facts.Add(L.F("сейчас без перерыва: {0}", Fmt(current)));
         if (facts.Count > 0) StatsBody.Children.Add(StatsText(string.Join(" · ", facts)));
 
         StatsBody.Children.Add(CategoryBar(day.ByCategory));

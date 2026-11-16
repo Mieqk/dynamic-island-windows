@@ -601,5 +601,11 @@
  "Параметры": "Settings",
  "Диспетчер задач": "Task Manager",
  "Поиск": "Search",
- "Экран блокировки": "Lock screen"
+ "Экран блокировки": "Lock screen",
+ "Напоминать об отдыхе": "Remind me to rest",
+ "Выкл": "Off",
+ "Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить».": "The island gently tells you when you have been at the computer for long without a break (a pause of 3 minutes counts as a break). It stays quiet during films, games and Do Not Disturb.",
+ "Пора сделать перерыв": "Time for a break",
+ "Вы за компьютером уже {0} без перерыва. Отдохните пару минут.": "You have been at the computer for {0} without a break. Rest for a couple of minutes.",
+ "сейчас без перерыва: {0}": "now without a break: {0}"
 }
