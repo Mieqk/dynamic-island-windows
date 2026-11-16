@@ -15,7 +15,7 @@ namespace DynamicIsland.Services;
 /// </summary>
 public static class Updater
 {
-    public const string Repo = "Fuwni/dynamic-island-windows";
+    public const string Repo = "Mieqk/dynamic-island-windows";   // this fork: updates must not replace it with the original
     public static string ReleasesPage => $"https://github.com/{Repo}/releases/latest";
 
     public sealed record UpdateInfo(Version Version, string Tag, string? SetupUrl, long SetupSize, string? Sha256, string PageUrl);

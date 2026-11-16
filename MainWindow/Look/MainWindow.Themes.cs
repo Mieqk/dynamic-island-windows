@@ -42,7 +42,7 @@ public partial class MainWindow
         new("linen", "Лён", false, "#7A6F63", "#8C6A4F", "none"),
     ];
 
-    private const string ThemeStoreUrl = "https://raw.githubusercontent.com/Fuwni/dynamic-island-windows/main/themes/themes.json";
+    private const string ThemeStoreUrl = "https://raw.githubusercontent.com/Mieqk/dynamic-island-windows/main/themes/themes.json";
     private static string PhotoPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DynamicIsland", "island-photo.jpg");
 
     // ---------------------------------------------------------------- gallery
