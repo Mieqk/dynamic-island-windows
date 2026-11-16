@@ -39,3 +39,30 @@ LanguageTool · замечаний: {0}	LanguageTool · {0} issues	LanguageTool 
 Основа — Atoll от Fuwni (лицензия MIT). Эта версия доработана специально для тебя.	Based on Atoll by Fuwni (MIT license). This version is adapted for you.	Основа — Atoll від Fuwni (ліцензія MIT). Цю версію доопрацьовано під вас.	Basado en Atoll de Fuwni (licencia MIT). Esta versión está adaptada para ti.	Basiert auf Atoll von Fuwni (MIT-Lizenz). Diese Version ist für Sie angepasst.	Baseado no Atoll de Fuwni (licença MIT). Esta versão foi adaptada para você.	基于 Fuwni 的 Atoll（MIT 许可）。此版本为您定制。
 Загрузить послание…	Load a message…	Завантажити послання…	Cargar un mensaje…	Nachricht laden…	Carregar uma mensagem…	加载留言…
 Это не похоже на файл послания	This does not look like a message file	Це не схоже на файл послання	Esto no parece un archivo de mensaje	Das sieht nicht nach einer Nachrichtendatei aus	Isto não parece um arquivo de mensagem	这不像是留言文件
+Неделя	Week	Тиждень	Semana	Woche	Semana	本周
+{0} ч	{0} h	{0} год	{0} h	{0} Std.	{0} h	{0} 小时
+Работа	Work	Робота	Trabajo	Arbeit	Trabalho	工作
+Общение	Communication	Спілкування	Comunicación	Kommunikation	Comunicação	交流
+Интернет	Internet	Інтернет	Internet	Internet	Internet	上网
+Творчество	Creative	Творчість	Creatividad	Kreatives	Criação	创作
+Развлечения	Entertainment	Розваги	Ocio	Unterhaltung	Lazer	娱乐
+Другое	Other	Інше	Otros	Sonstiges	Outros	其他
+{0}: нажмите, чтобы сменить категорию	{0}: click to change the category	{0}: натисніть, щоб змінити категорію	{0}: haz clic para cambiar la categoría	{0}: klicken, um die Kategorie zu ändern	{0}: clique para mudar a categoria	{0}：点击更改类别
+с {0} до {1}	from {0} to {1}	з {0} до {1}	de {0} a {1}	von {0} bis {1}	das {0} às {1}	{0} 至 {1}
+дольше всего без перерыва: {0}	longest without a break: {0}	найдовше без перерви: {0}	lo más largo sin pausa: {0}	am längsten ohne Pause: {0}	mais tempo sem pausa: {0}	最长连续使用：{0}
+ПО ЧАСАМ	BY HOUR	ЗА ГОДИНАМИ	POR HORA	NACH STUNDE	POR HORA	按小时
+ПРИЛОЖЕНИЯ	APPS	ЗАСТОСУНКИ	APLICACIONES	APPS	APLICATIVOS	应用
+В среднем {0} в день	{0} a day on average	У середньому {0} на день	{0} al día de media	Im Schnitt {0} pro Tag	Em média {0} por dia	平均每天 {0}
+на {0} % больше, чем на прошлой неделе	{0}% more than last week	на {0} % більше, ніж минулого тижня	un {0} % más que la semana pasada	{0} % mehr als letzte Woche	{0}% a mais que na semana passada	比上周多 {0}%
+на {0} % меньше, чем на прошлой неделе	{0}% less than last week	на {0} % менше, ніж минулого тижня	un {0} % menos que la semana pasada	{0} % weniger als letzte Woche	{0}% a menos que na semana passada	比上周少 {0}%
+больше всего: {0}	busiest: {0}	найбільше: {0}	el día con más uso: {0}	am meisten: {0}	dia mais cheio: {0}	最多的一天：{0}
+Яндекс Браузер	Yandex Browser	Яндекс Браузер	Yandex Browser	Yandex Browser	Yandex Browser	Yandex 浏览器
+Блокнот	Notepad	Блокнот	Bloc de notas	Editor	Bloco de notas	记事本
+Терминал	Terminal	Термінал	Terminal	Terminal	Terminal	终端
+Командная строка	Command Prompt	Командний рядок	Símbolo del sistema	Eingabeaufforderung	Prompt de Comando	命令提示符
+Проводник	File Explorer	Провідник	Explorador de archivos	Explorer	Explorador de Arquivos	文件资源管理器
+Приложение Windows	Windows app	Застосунок Windows	Aplicación de Windows	Windows-App	Aplicativo do Windows	Windows 应用
+Параметры	Settings	Параметри	Configuración	Einstellungen	Configurações	设置
+Диспетчер задач	Task Manager	Диспетчер завдань	Administrador de tareas	Task-Manager	Gerenciador de Tarefas	任务管理器
+Поиск	Search	Пошук	Búsqueda	Suche	Pesquisa	搜索
+Экран блокировки	Lock screen	Екран блокування	Pantalla de bloqueo	Sperrbildschirm	Tela de bloqueio	锁屏

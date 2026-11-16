@@ -60,6 +60,8 @@ public sealed class Settings
     public bool ShowsSource(string id) => !HiddenSources.Contains(id);
     /// <summary>Count the time in each app (names only, stored on this PC, see PRIVACY.md).</summary>
     public bool UsageStats { get; set; } = true;
+    /// <summary>Programs the user moved to another category on the Statistics tab: process name → category id (see UsageCatalog).</summary>
+    public Dictionary<string, string> UsageCategories { get; set; } = [];
     /// <summary>The browser extension may talk to the island (off until the user switches it on; see ExtensionBridge).</summary>
     public bool ExtensionEnabled { get; set; }
     /// <summary>Which personal greetings were already shown ("first", "MM-dd/yyyy"); see Dedication.</summary>

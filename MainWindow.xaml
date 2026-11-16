@@ -796,10 +796,15 @@
               <Border Style="{StaticResource Tile}">
                 <StackPanel>
                   <DockPanel>
-                    <TextBlock x:Name="StatsTotal" DockPanel.Dock="Right" Style="{StaticResource Muted}"/>
-                    <TextBlock Style="{StaticResource Caption}" Text="СЕГОДНЯ ПО ПРИЛОЖЕНИЯМ"/>
+                    <TextBlock x:Name="StatsTotal" DockPanel.Dock="Right" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                      <RadioButton x:Name="StatsDayTab" Style="{StaticResource Segment}" GroupName="StatsRange" Content="Сегодня"
+                                   IsChecked="True" Checked="StatsRange_Checked"/>
+                      <RadioButton x:Name="StatsWeekTab" Style="{StaticResource Segment}" GroupName="StatsRange" Content="Неделя"
+                                   Margin="4,0,0,0" Checked="StatsRange_Checked"/>
+                    </StackPanel>
                   </DockPanel>
-                  <StackPanel x:Name="StatsList" Margin="0,12,0,0"/>
+                  <StackPanel x:Name="StatsBody" Margin="0,12,0,0"/>
                   <TextBlock x:Name="StatsEmpty" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,8,0,0"/>
                   <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,12,0,10" FontSize="11"
                              Text="Считается только название программы, без заголовков окон. Данные хранятся на этом ПК и никуда не отправляются. Время, пока вы отошли, не учитывается."/>
