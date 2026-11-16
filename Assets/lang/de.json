@@ -601,5 +601,11 @@
  "Параметры": "Einstellungen",
  "Диспетчер задач": "Task-Manager",
  "Поиск": "Suche",
- "Экран блокировки": "Sperrbildschirm"
+ "Экран блокировки": "Sperrbildschirm",
+ "Напоминать об отдыхе": "An Pausen erinnern",
+ "Выкл": "Aus",
+ "Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить».": "Die Insel weist sanft darauf hin, wenn Sie lange ohne Pause am Computer sind (eine Pause ab 3 Minuten zählt). Bei Filmen, Spielen und „Nicht stören“ bleibt sie still.",
+ "Пора сделать перерыв": "Zeit für eine Pause",
+ "Вы за компьютером уже {0} без перерыва. Отдохните пару минут.": "Sie sind seit {0} ohne Pause am Computer. Ruhen Sie sich ein paar Minuten aus.",
+ "сейчас без перерыва: {0}": "jetzt ohne Pause: {0}"
 }

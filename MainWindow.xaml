@@ -806,6 +806,15 @@
                   </DockPanel>
                   <StackPanel x:Name="StatsBody" Margin="0,12,0,0"/>
                   <TextBlock x:Name="StatsEmpty" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                  <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                    <TextBlock Text="Напоминать об отдыхе" FontSize="13" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <RadioButton x:Name="BreakOff" Style="{StaticResource Segment}" GroupName="BreakEvery" Checked="BreakEvery_Checked"/>
+                    <RadioButton x:Name="Break30" Style="{StaticResource Segment}" GroupName="BreakEvery" Margin="4,0,0,0" Checked="BreakEvery_Checked"/>
+                    <RadioButton x:Name="Break50" Style="{StaticResource Segment}" GroupName="BreakEvery" Margin="4,0,0,0" Checked="BreakEvery_Checked"/>
+                    <RadioButton x:Name="Break90" Style="{StaticResource Segment}" GroupName="BreakEvery" Margin="4,0,0,0" Checked="BreakEvery_Checked"/>
+                  </StackPanel>
+                  <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,6,0,0" FontSize="11"
+                             Text="Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить»."/>
                   <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,12,0,10" FontSize="11"
                              Text="Считается только название программы, без заголовков окон. Данные хранятся на этом ПК и никуда не отправляются. Время, пока вы отошли, не учитывается."/>
                   <StackPanel Orientation="Horizontal">

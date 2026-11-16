@@ -62,6 +62,8 @@ public sealed class Settings
     public bool UsageStats { get; set; } = true;
     /// <summary>Programs the user moved to another category on the Statistics tab: process name → category id (see UsageCatalog).</summary>
     public Dictionary<string, string> UsageCategories { get; set; } = [];
+    /// <summary>Suggest a break after this many minutes at the computer without one (0 = never). Off until the user picks an interval.</summary>
+    public int BreakReminderMinutes { get; set; }
     /// <summary>The browser extension may talk to the island (off until the user switches it on; see ExtensionBridge).</summary>
     public bool ExtensionEnabled { get; set; }
     /// <summary>Which personal greetings were already shown ("first", "MM-dd/yyyy"); see Dedication.</summary>

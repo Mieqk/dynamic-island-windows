@@ -601,5 +601,11 @@
  "Параметры": "Configurações",
  "Диспетчер задач": "Gerenciador de Tarefas",
  "Поиск": "Pesquisa",
- "Экран блокировки": "Tela de bloqueio"
+ "Экран блокировки": "Tela de bloqueio",
+ "Напоминать об отдыхе": "Lembrar de descansar",
+ "Выкл": "Não",
+ "Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить».": "A ilha avisa com delicadeza quando você está há muito tempo no computador sem pausa (uma pausa de 3 minutos conta como descanso). Fica quieta durante filmes, jogos e no Não perturbe.",
+ "Пора сделать перерыв": "Hora de uma pausa",
+ "Вы за компьютером уже {0} без перерыва. Отдохните пару минут.": "Você está há {0} no computador sem pausa. Descanse alguns minutos.",
+ "сейчас без перерыва: {0}": "agora sem pausa: {0}"
 }
