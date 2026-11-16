@@ -15,16 +15,24 @@ public sealed class UsageStats
     private const int KeepDays = 90;
     private const double IdleLimitSec = 120;
 
-    private static readonly string FilePath = Path.Combine(
+    private static string DefaultPath => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DynamicIsland", "usage.json");
 
+    private static string DayKey(DateTime day) => day.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+    private readonly string _file;
     // "yyyy-MM-dd" -> process name -> seconds
     private Dictionary<string, Dictionary<string, double>> _days = [];
     private DateTime _last = DateTime.Now;
     private DateTime _lastSave = DateTime.Now;
     private bool _dirty;
 
-    public UsageStats() => Load();
+    /// <param name="filePath">Where the totals are kept; the default is %APPDATA%\DynamicIsland\usage.json (tests pass their own).</param>
+    public UsageStats(string? filePath = null)
+    {
+        _file = filePath ?? DefaultPath;
+        Load();
+    }
 
     /// <summary>Add the time since the last call to the app that is in front now.</summary>
     public void Tick()
@@ -37,24 +45,30 @@ public sealed class UsageStats
         var app = ForegroundApp();
         if (app == null) return;
 
-        string key = now.ToString("yyyy-MM-dd");
-        if (!_days.TryGetValue(key, out var day)) _days[key] = day = [];
-        day[app] = day.GetValueOrDefault(app) + dt;
-        _dirty = true;
-
+        Add(app, dt, now);
         if ((now - _lastSave).TotalSeconds >= 30) Save();
+    }
+
+    /// <summary>Count <paramref name="seconds"/> for an app on the day of <paramref name="when"/>.</summary>
+    internal void Add(string app, double seconds, DateTime when)
+    {
+        if (seconds <= 0 || string.IsNullOrEmpty(app)) return;
+        string key = DayKey(when);
+        if (!_days.TryGetValue(key, out var day)) _days[key] = day = [];
+        day[app] = day.GetValueOrDefault(app) + seconds;
+        _dirty = true;
     }
 
     /// <summary>Apps for a day (default: today), the longest first.</summary>
     public IReadOnlyList<(string App, TimeSpan Time)> Top(int count = 8, DateTime? day = null)
     {
-        if (!_days.TryGetValue((day ?? DateTime.Now).ToString("yyyy-MM-dd"), out var d)) return [];
+        if (!_days.TryGetValue(DayKey(day ?? DateTime.Now), out var d)) return [];
         return d.OrderByDescending(kv => kv.Value).Take(count)
                 .Select(kv => (kv.Key, TimeSpan.FromSeconds(kv.Value))).ToList();
     }
 
     public TimeSpan Total(DateTime? day = null) =>
-        _days.TryGetValue((day ?? DateTime.Now).ToString("yyyy-MM-dd"), out var d)
+        _days.TryGetValue(DayKey(day ?? DateTime.Now), out var d)
             ? TimeSpan.FromSeconds(d.Values.Sum()) : TimeSpan.Zero;
 
     /// <summary>Forget everything (the "reset" button).</summary>
@@ -62,21 +76,24 @@ public sealed class UsageStats
     {
         _days.Clear();
         _dirty = false;
-        try { if (File.Exists(FilePath)) File.Delete(FilePath); } catch { }
+        try { if (File.Exists(_file)) File.Delete(_file); } catch { }
     }
 
-    public void Save()
+    public void Save() => Save(DateTime.Now);
+
+    /// <summary>Write the totals (days older than 90 days before <paramref name="now"/> are dropped).</summary>
+    internal void Save(DateTime now)
     {
         _lastSave = DateTime.Now;
         if (!_dirty) return;
         try
         {
-            string oldest = DateTime.Now.AddDays(-KeepDays).ToString("yyyy-MM-dd");
+            string oldest = DayKey(now.AddDays(-KeepDays));
             foreach (var k in _days.Keys.Where(k => string.CompareOrdinal(k, oldest) < 0).ToList()) _days.Remove(k);
-            Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-            string tmp = FilePath + ".tmp";
+            Directory.CreateDirectory(Path.GetDirectoryName(_file)!);
+            string tmp = _file + ".tmp";
             File.WriteAllText(tmp, JsonSerializer.Serialize(_days));
-            File.Move(tmp, FilePath, true);
+            File.Move(tmp, _file, true);
             _dirty = false;
         }
         catch { /* statistics are not worth a crash */ }
@@ -86,8 +103,8 @@ public sealed class UsageStats
     {
         try
         {
-            if (File.Exists(FilePath))
-                _days = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(FilePath)) ?? [];
+            if (File.Exists(_file))
+                _days = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(_file)) ?? [];
         }
         catch { _days = []; }
     }

@@ -393,7 +393,13 @@ Services/{Media,Capture,Agents,Info,Core,Platform}   логика без инт�
 Assets/, tools/i18n/, docs/      иконка и переводы, таблицы переводов, скриншоты и протокол моста
 ```
 
-Подробнее — в [английском README](README.en.md#project-layout). Каждый push собирается в GitHub Actions — готовый архив во вкладке **Actions → артефакты**.
+Подробнее — в [английском README](README.en.md#project-layout). Тесты логики без окна (подсчёт статистики, доступ расширения, чтение послания, инструменты текста):
+
+```bash
+dotnet test tests/DynamicIsland.Tests
+```
+
+Каждый push собирается в GitHub Actions — готовый архив во вкладке **Actions → артефакты**.
 
 ---
 

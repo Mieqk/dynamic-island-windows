@@ -27,6 +27,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- tests/ is a separate project: keep its files (and its obj/) out of this one -->
+    <Compile Remove="tests\**" />
+    <EmbeddedResource Remove="tests\**" />
+    <None Remove="tests\**" />
+    <Page Remove="tests\**" />
+    <InternalsVisibleTo Include="DynamicIsland.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- WinForms is only used for the tray icon and GDI capture; keep its names out of the way. -->
     <Using Remove="System.Windows.Forms" />
     <Using Remove="System.Drawing" />
