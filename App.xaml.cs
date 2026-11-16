@@ -7,9 +7,21 @@ public partial class App : Application
 {
     private Mutex? _mutex;
 
+    private readonly ErrorFlood _errors = new();
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        // an unexpected error in a click or a timer used to close the island without a trace:
+        // now it goes to the log and the island keeps running (unless errors come in a flood)
+        DispatcherUnhandledException += (_, ev) =>
+        {
+            Log.Write("unexpected error: " + ev.Exception);
+            ev.Handled = _errors.Allow(DateTime.Now);
+        };
+        AppDomain.CurrentDomain.UnhandledException += (_, ev) => Log.Write("fatal error: " + ev.ExceptionObject);
+        TaskScheduler.UnobservedTaskException += (_, ev) => { Log.Write("background error: " + ev.Exception); ev.SetObserved(); };
 
         if (e.Args.Contains("--uninstall"))
         {

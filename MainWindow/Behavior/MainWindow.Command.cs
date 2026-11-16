@@ -216,7 +216,9 @@ public partial class MainWindow
         {
             double n = double.Parse(tm.Groups[1].Value.Replace(',', '.'), CultureInfo.InvariantCulture);
             var unit = tm.Groups[2].Value;
-            var span = unit.StartsWith('с') || unit.StartsWith('s') ? TimeSpan.FromSeconds(n)
+            // a huge number would overflow TimeSpan and throw while the user is still typing
+            var span = n > 600_000 ? TimeSpan.Zero
+                     : unit.StartsWith('с') || unit.StartsWith('s') ? TimeSpan.FromSeconds(n)
                      : unit.StartsWith('ч') || unit == "h" ? TimeSpan.FromHours(n) : TimeSpan.FromMinutes(n);
             if (span.TotalSeconds is >= 1 and <= 36000)
                 list.Add(new CommandItem(L.F("Таймер на {0}", FormatSpan(span)), L.T("запустить"), "", () => StartQuickTimer(span)));

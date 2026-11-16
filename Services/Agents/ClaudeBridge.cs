@@ -191,7 +191,7 @@ public sealed class ClaudeBridge
                     var id = Str(json, "id", 40);
                     if (string.IsNullOrWhiteSpace(id)) break;
                     AppActivityChanged?.Invoke(new AppActivity(Str(json, "app", 40) ?? "App", id, Str(json, "text", 80) ?? "",
-                        Num(json, "progress", -1), (long)Num(json, "endsAt", 0), Num(json, "durationSec", 0),
+                        Num(json, "progress", -1), SaneEndsAt(Num(json, "endsAt", 0), DateTimeOffset.UtcNow), Num(json, "durationSec", 0),
                         (int)Math.Clamp(Num(json, "ttlSec", 600), 5, 3600), json["clear"] is JsonValue c && c.TryGetValue<bool>(out var b) && b));
                     break;
                 }
@@ -229,6 +229,15 @@ public sealed class ClaudeBridge
     /// <summary>A string field, cut to <paramref name="max"/> characters; null when absent or not a string.</summary>
     private static string? Str(JsonObject o, string key, int max) =>
         o[key] is JsonValue v && v.TryGetValue<string>(out var s) ? (s.Length > max ? s[..max] : s) : null;
+
+    /// <summary>A countdown end (unix ms) is used only within a day of now; anything else (0, garbage, year 9999) means "none".</summary>
+    internal static long SaneEndsAt(double unixMs, DateTimeOffset now)
+    {
+        if (!double.IsFinite(unixMs) || unixMs <= 0) return 0;
+        double nowMs = now.ToUnixTimeMilliseconds();
+        const double day = 24 * 60 * 60 * 1000.0;
+        return unixMs > nowMs - day && unixMs < nowMs + day ? (long)unixMs : 0;
+    }
 
     private static double Num(JsonObject o, string key, double fallback) =>
         o[key] is JsonValue v && v.TryGetValue<double>(out var d) && double.IsFinite(d) ? d : fallback;
