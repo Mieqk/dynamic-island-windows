@@ -2,6 +2,36 @@
 
 All notable changes to Atoll (formerly "Dynamic Island for Windows"). Русская версия каждого пункта — ниже английской.
 
+## 1.8.1 — 2026-11-16
+
+Fixes first, then a much deeper Statistics tab.
+
+### Fixed
+- **Updates now come from this fork.** The app used to check the original project for updates: when the original published a newer version, it would have offered to replace this one with it. The update check, the releases page, the online theme gallery and the installer's updates link now point to this fork.
+- **No more closing while typing in the command bar.** "remind … in 99999999999 min" and "timer 99999999999999999999" used to close the app (a number overflow); they are now simply not a time.
+- **Unexpected errors no longer close the island without a trace**: they go to `log.txt` and the island keeps running (a flood of errors still stops it).
+- "No character": the invisible character in the open island's header no longer takes clicks and room.
+- Statistics are saved when the island closes (up to 30 seconds were lost).
+- The character gallery in Settings is calmer: cards away from the cursor are fully still (before, with music playing, all 16 redrew 30 times a second).
+- Other apps and `dedication.json` can no longer break the island with odd input (a far-away countdown end, empty activities, `null` fields).
+
+### Statistics 2.0
+- **Today and Week** views: total, from–to, the longest stretch without a break, how much of each hour you spent at the computer, a comparison with the previous week and the busiest day.
+- **Categories** (work, communication, internet, creative, entertainment, other) with friendly program names; click the dot of a program to move it to another category.
+- **Gentle break reminders** (off by default: 30, 50 or 90 minutes without a break; a pause of 3 minutes is a break). Quiet during films, games, recordings and Do Not Disturb.
+- A film playing full screen now counts as time at the screen. The statistics file is upgraded automatically; everything still stays on this PC.
+
+### Under the hood
+- Automated tests of the window-less logic run in every build (statistics, extension access check, message file, link safety, parsing); the extension's tests run in CI too.
+- A release can be published by pushing a tag with or without the "v", or by running the workflow with a tag.
+
+### По-русски
+- **Обновления теперь из этого форка**, а не из оригинала: раньше при выходе новой версии оригинала приложение предложило бы заменить на неё эту.
+- Больше не закрывается при вводе в командной строке («напомни через 99999999999 мин», «таймер 99999999999999999999»).
+- Неожиданные ошибки пишутся в `log.txt`, остров продолжает работать; статистика сохраняется при закрытии; галерея персонажей в настройках спокойнее; странные данные от других приложений и из файла послания больше не ломают остров.
+- **«Статистика 2.0»**: виды «Сегодня» и «Неделя», время по часам, самый длинный отрезок без перерыва, сравнение с прошлой неделей; категории программ (точка слева переносит программу в другую категорию); мягкие напоминания об отдыхе (по умолчанию выключены); фильм на весь экран считается временем у экрана.
+- Автоматические тесты логики в каждой сборке; релиз публикуется по тегу.
+
 ## 1.8.0 — 2026-11-15
 
 The first release of this fork (based on Atoll 1.7.0 by Fuwni, MIT): a calmer, quieter island with new tools.
