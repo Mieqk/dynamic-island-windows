@@ -1547,11 +1547,13 @@ public partial class MainWindow : Window
             double dx = cursor.X - c.X, dy = cursor.Y - c.Y;
             // the gallery shows 16 characters: only the one near the cursor follows it, the rest rest
             // (a character that keeps changing its gaze is redrawn 30 times a second)
-            if (nearOnly && dx * dx + dy * dy > 120.0 * 120.0) dx = dy = 0;
+            bool resting = nearOnly && dx * dx + dy * dy > 120.0 * 120.0;
+            if (resting) dx = dy = 0;
+            ch.Still = resting;   // a resting gallery card is a still picture: no music beat, mood, blink or breathing
             ch.LookX = Math.Clamp(dx / 170.0, -1, 1);
             ch.LookY = Math.Clamp(dy / 170.0, -1, 1);
-            ch.Beat = beat;
-            ch.Mood = moodOverride ?? mood;
+            ch.Beat = resting ? 0 : beat;
+            ch.Mood = resting ? Views.CharacterMood.Idle : (moodOverride ?? mood);
             ch.Tint = _albumColor;
             ch.Sketch = _settings.HandDrawn;
             ch.Tick(gazeDt);

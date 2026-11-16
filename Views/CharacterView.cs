@@ -84,6 +84,13 @@ public sealed class CharacterView : FrameworkElement
     /// <summary>Performance test only: stop drawing.</summary>
     public static bool PerfFreeze;
 
+    /// <summary>
+    /// A resting picture: it is not redrawn on its own (no breathing, no blinking). Used for the gallery in Settings,
+    /// where only the card under the cursor lives: every redraw refreshes the whole see-through island window.
+    /// Emotions and jumps (a click) still play.
+    /// </summary>
+    public bool Still { get; set; }
+
     public void Tick(double dt)
     {
         if (PerfFreeze) return;
@@ -116,9 +123,9 @@ public sealed class CharacterView : FrameworkElement
         // a calm character breathes slowly: 15 redraws a second are enough, 8 while asleep.
         // Anything lively (an emotion, a jump, music, the eyes following the cursor) gets the full 30.
         _sinceDraw += dt;
-        bool lively = _emoteLeft > 0 || _happy > 0 || !_jump.IsSettled || _blink > 0 || Mood == CharacterMood.Music
-                      || Math.Abs(_lookX - _drawnLookX) > 0.015 || Math.Abs(_lookY - _drawnLookY) > 0.015 || _beat > 0.02;
-        double interval = lively ? 0 : Mood == CharacterMood.Sleep ? 1 / 8.0 : 1 / 15.0;
+        bool lively = _emoteLeft > 0 || _happy > 0 || !_jump.IsSettled || (_blink > 0 && !Still) || (Mood == CharacterMood.Music && !Still)
+                      || Math.Abs(_lookX - _drawnLookX) > 0.015 || Math.Abs(_lookY - _drawnLookY) > 0.015 || (_beat > 0.02 && !Still);
+        double interval = lively ? 0 : Still ? double.PositiveInfinity : Mood == CharacterMood.Sleep ? 1 / 8.0 : 1 / 15.0;
         if (_sinceDraw + 1e-6 < interval) return;
         _sinceDraw = 0;
         _drawnLookX = _lookX;
