@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DynamicIsland.csproj" />
     <Using Include="Xunit" />
+    <Using Include="System.IO" />   <!-- WPF projects do not import it implicitly -->
   </ItemGroup>
 
 </Project>
