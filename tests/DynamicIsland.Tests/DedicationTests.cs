@@ -59,6 +59,24 @@ public class DedicationTests
         Assert.Null(d!.Today(new DateTime(2027, 1, 2)));
     }
 
+    [Fact]
+    public void Nulls_in_the_file_are_read_as_empty()
+    {
+        using var tmp = new TempFolder();
+        var file = tmp.File("dedication.json");
+        File.WriteAllText(file, """
+            { "title": "Имя", "toast": null, "message": null, "signature": null, "themeName": null, "versionLabel": null,
+              "specialDates": [ null, { "date": null, "title": "x", "text": null } ] }
+            """);
+
+        var d = Dedication.Read(file);
+        Assert.NotNull(d);
+        Assert.Equal("", d!.Toast);
+        Assert.Equal("", d.ThemeName);
+        Assert.Single(d.SpecialDates);
+        Assert.Null(d.Today(new DateTime(2027, 1, 2)));
+    }
+
     [Theory]
     [InlineData("{ not json")]
     [InlineData("{}")]

@@ -57,10 +57,12 @@ public sealed partial class CalendarService
         if (!rel.Success) rel = Regex.Match(s, @"(\d+)\s*(分钟|小时)后?");
         if (rel.Success)
         {
-            int n = int.Parse(rel.Groups[1].Value);
+            // a number too long for an int, or further away than a year, is not a quick reminder (and must not throw)
+            if (!int.TryParse(rel.Groups[1].Value, out int n) || n > 600_000) return null;
             var unit = rel.Groups[2].Value;
             bool minutes = unit.StartsWith('м') || unit.StartsWith('m') || unit == "хв" || unit == "分钟";
-            return minutes ? now.AddMinutes(n) : now.AddHours(n);
+            var ahead = minutes ? TimeSpan.FromMinutes(n) : TimeSpan.FromHours(n);
+            return ahead > TimeSpan.FromDays(366) ? null : now + ahead;
         }
 
         string[] dayAfter = ["послезавтра", "післязавтра", "day after tomorrow", "pasado mañana", "übermorgen", "depois de amanhã", "后天"];

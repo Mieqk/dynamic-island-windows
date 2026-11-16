@@ -716,6 +716,7 @@ public partial class MainWindow : Window
         Native.RemoveClipboardFormatListener(_hwnd);
         ShutdownChat();
         _settings.Save();
+        _usage.Save();
         FocusMode.End(); // never leave Windows notifications switched off
         _fps.Dispose();
         ShutdownControlCenter(); // taskbar and desktop icons come back
@@ -1571,7 +1572,7 @@ public partial class MainWindow : Window
         if (buddy) Drive(ChatBuddy, ChatBuddyMood());
 
         // the same character keeps you company in the open menu (unless it already sits on the chat)
-        bool menu = _mode == Mode.Expanded && !buddy;
+        bool menu = _mode == Mode.Expanded && !buddy && _settings.Character != "none";
         var menuVis = menu ? Visibility.Visible : Visibility.Collapsed;
         if (MenuBuddy.Visibility != menuVis)
         {

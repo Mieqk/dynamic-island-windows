@@ -39,7 +39,7 @@ public partial class MainWindow
     {
         if (!Shows("apps")) return;
         string key = (a.App + ":" + a.Id).ToLowerInvariant();
-        if (a.Clear) { _appLive.Remove(key); return; }
+        if (a.Clear || (a.Text.Length == 0 && a.EndsAtMs <= 0)) { _appLive.Remove(key); return; }   // cleared, or nothing to show
         if (!_appLive.ContainsKey(key) && _appLive.Count >= MaxAppActivities) return;   // a runaway sender must not flood the pill
 
         var live = new AppLive { App = a.App, Text = a.Text, Progress = a.Progress, DurationSec = a.DurationSec, EndsAtMs = a.EndsAtMs };

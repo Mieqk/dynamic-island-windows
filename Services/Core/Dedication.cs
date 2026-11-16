@@ -55,8 +55,11 @@ public sealed class Dedication
         {
             if (!File.Exists(path)) return null;
             var d = JsonSerializer.Deserialize<Dedication>(File.ReadAllText(path), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            if (d == null || (d.Title.Length == 0 && d.Message.Length == 0 && d.Toast.Length == 0)) return null;
-            d.SpecialDates ??= [];
+            if (d == null) return null;
+            d.Title ??= ""; d.Toast ??= ""; d.Message ??= ""; d.Signature ??= ""; d.ThemeName ??= ""; d.VersionLabel ??= "";
+            d.SpecialDates = (d.SpecialDates ?? []).Where(s => s != null).ToList();
+            foreach (var s in d.SpecialDates) { s.Date ??= ""; s.Title ??= ""; s.Text ??= ""; }
+            if (d.Title.Length == 0 && d.Message.Length == 0 && d.Toast.Length == 0) return null;
             return d;
         }
         catch { return null; }   // a broken file is simply not used
