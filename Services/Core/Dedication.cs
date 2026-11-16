@@ -49,7 +49,7 @@ public sealed class Dedication
     }
 
     /// <summary>The file as a dedication, or null when it is missing, broken or has no words in it.</summary>
-    private static Dedication? Read(string path)
+    internal static Dedication? Read(string path)
     {
         try
         {

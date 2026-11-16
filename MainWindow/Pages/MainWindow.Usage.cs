@@ -13,7 +13,9 @@ public partial class MainWindow
     private void TrackUsage()
     {
         if (!_settings.UsageStats || _liveDemo || _demoMedia != null) return;
-        _usage.Tick();
+        // watching a film full screen: no keyboard or mouse for a long time, but it is still time at the screen
+        bool watching = _lastMedia?.IsPlaying == true && _hwnd != IntPtr.Zero && Native.IsFullscreenAppActive(_hwnd);
+        _usage.Tick(watching);
         // the open tab refreshes itself every 5 seconds
         if (_mode == Mode.Expanded && TabStats.IsChecked == true && _slowCount % 5 == 0) RenderUsage();
     }

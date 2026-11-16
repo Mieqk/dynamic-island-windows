@@ -26,6 +26,9 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Tests (logic without the window)
+        run: dotnet test tests/DynamicIsland.Tests/DynamicIsland.Tests.csproj -c Release --logger "console;verbosity=normal"
+
       - name: Publish (self-contained, win-x64)
         run: dotnet publish DynamicIsland.csproj -c Release -r win-x64 --self-contained true -o publish/DynamicIsland
 
@@ -72,3 +75,25 @@ jobs:
           files: |
             DynamicIsland-win-x64.zip
             dist/*-setup.exe
+
+  # the browser extension: unit tests and a run in real Chromium with the extension loaded
+  extension:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Unit tests
+        run: npm test
+
+      - name: End-to-end (Chromium with the extension)
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+          npm run e2e
