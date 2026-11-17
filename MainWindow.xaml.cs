@@ -950,9 +950,9 @@ public partial class MainWindow : Window
         }
     }
 
-    private RadioButton[] Tabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabCalendar, TabSystem, TabStats, TabSettings];
+    private RadioButton[] Tabs => [TabHome, TabMusic, TabWeather, TabChat, TabTimer, TabClip, TabNotes, TabTasks, TabCalendar, TabSystem, TabStats, TabSettings];
 
-    private FrameworkElement[] AllPages => [HomePage, MusicPage, WeatherPage, ChatPage, TimerPage, ClipPage, NotesPage, CalendarPage, SystemPage, StatsPage, SettingsPage];
+    private FrameworkElement[] AllPages => [HomePage, MusicPage, WeatherPage, ChatPage, TimerPage, ClipPage, NotesPage, TasksPage, CalendarPage, SystemPage, StatsPage, SettingsPage];
 
     private FrameworkElement CurrentPage
     {
@@ -1116,6 +1116,7 @@ public partial class MainWindow : Window
         else if (TabSettings.IsChecked == true) RefreshSettingsPage();
         else if (TabClip.IsChecked == true) RenderClipSection();
         else if (TabNotes.IsChecked == true) RenderNotes();
+        else if (TabTasks.IsChecked == true) RenderTasks();
         else if (TabCalendar.IsChecked == true) RenderCalendar();
         else if (TabTimer.IsChecked == true) RenderTimer();
         else if (TabSystem.IsChecked == true) _ = RefreshSystemAsync(full: true);

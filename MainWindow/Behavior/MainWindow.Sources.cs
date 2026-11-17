@@ -11,7 +11,7 @@ public partial class MainWindow
 {
     public static readonly (string Id, string Name)[] IslandSources =
     [
-        ("music", "Музыка"), ("timer", "Таймер"), ("discord", "Звонок Discord"), ("clip", "Буфер"),
+        ("music", "Музыка"), ("timer", "Таймер"), ("tasks", "Задачи"), ("discord", "Звонок Discord"), ("clip", "Буфер"),
         ("download", "Загрузки"), ("event", "Календарь"), ("game", "Игровой режим"),
         ("focus", "Не беспокоить"), ("messages", "Сообщения"), ("apps", "Другие приложения"),
     ];

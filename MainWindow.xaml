@@ -266,6 +266,7 @@
             <RadioButton x:Name="TabTimer" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Таймер" Tag="&#xE916;" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabClip" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Буфер" Tag="&#xE77F;" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabNotes" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Заметки" Tag="&#xE70B;" Checked="Tab_Checked"/>
+            <RadioButton x:Name="TabTasks" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Задачи" Tag="&#xE73A;" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabCalendar" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Календарь" Tag="&#xE787;" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabSystem" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Система" Tag="&#xE7FC;" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabStats" Style="{StaticResource TabButton}" GroupName="Tabs" Content="Статистика" Tag="&#xE9D9;" Checked="Tab_Checked"/>
@@ -746,6 +747,32 @@
               <ScrollViewer MaxHeight="340" VerticalScrollBarVisibility="Hidden">
                 <StackPanel x:Name="NotesList"/>
               </ScrollViewer>
+            </StackPanel>
+
+            <!-- ======== TASKS: a short list for today (kept on this PC; can mirror a linked app) ======== -->
+            <StackPanel x:Name="TasksPage" Width="580" Visibility="Collapsed">
+              <Border Style="{StaticResource Tile}">
+                <StackPanel>
+                  <DockPanel>
+                    <TextBlock x:Name="TasksCount" DockPanel.Dock="Right" Style="{StaticResource Muted}"/>
+                    <TextBlock Style="{StaticResource Caption}" Text="ЗАДАЧИ НА СЕГОДНЯ"/>
+                  </DockPanel>
+                  <Grid Height="5" Margin="0,10,0,10">
+                    <Border Background="{DynamicResource TrackBg}" CornerRadius="2.5"/>
+                    <Border Background="{DynamicResource Accent}" CornerRadius="2.5" RenderTransformOrigin="0,0.5">
+                      <Border.RenderTransform><ScaleTransform x:Name="TasksBar" ScaleX="0"/></Border.RenderTransform></Border>
+                  </Grid>
+                  <TextBox x:Name="NewTaskBox" Style="{StaticResource SoftBox}" Height="34" MaxLength="300" KeyDown="NewTaskBox_KeyDown"/>
+                  <TextBlock Style="{StaticResource Muted}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"
+                             Text="Напишите задачу и нажмите Enter. Время вида 18:30 поставит напоминание."/>
+                  <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Hidden" Margin="0,8,0,0">
+                    <StackPanel x:Name="TasksList"/>
+                  </ScrollViewer>
+                  <TextBlock x:Name="TasksEmpty" Style="{StaticResource Muted}" Text="Пока задач нет" Margin="0,4,0,0"/>
+                  <Button x:Name="TasksClearDone" Style="{StaticResource GhostPill}" HorizontalAlignment="Left" Padding="12,6" Margin="0,10,0,0"
+                          Content="Убрать выполненные" Click="TasksClearDone_Click" Visibility="Collapsed"/>
+                </StackPanel>
+              </Border>
             </StackPanel>
 
             <!-- ======== CALENDAR ======== -->
