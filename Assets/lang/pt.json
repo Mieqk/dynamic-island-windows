@@ -607,5 +607,13 @@
  "Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить».": "A ilha avisa com delicadeza quando você está há muito tempo no computador sem pausa (uma pausa de 3 minutos conta como descanso). Fica quieta durante filmes, jogos e no Não perturbe.",
  "Пора сделать перерыв": "Hora de uma pausa",
  "Вы за компьютером уже {0} без перерыва. Отдохните пару минут.": "Você está há {0} no computador sem pausa. Descanse alguns minutos.",
- "сейчас без перерыва: {0}": "agora sem pausa: {0}"
+ "сейчас без перерыва: {0}": "agora sem pausa: {0}",
+ "Задачи": "Tarefas",
+ "ЗАДАЧИ НА СЕГОДНЯ": "TAREFAS DE HOJE",
+ "{0} из {1}": "{0} de {1}",
+ "Напишите задачу и нажмите Enter. Время вида 18:30 поставит напоминание.": "Escreva uma tarefa e pressione Enter. Um horário como 18:30 define um lembrete.",
+ "Пока задач нет": "Ainda não há tarefas",
+ "Убрать выполненные": "Remover concluídas",
+ "Задачи {0}/{1}": "Tarefas {0}/{1}",
+ "Задача": "Tarefa"
 }

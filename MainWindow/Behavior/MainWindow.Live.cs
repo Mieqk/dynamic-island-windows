@@ -84,6 +84,8 @@ public partial class MainWindow
                 lives.Add(("timer", _timer.Kind == TimerKind.Stopwatch ? "\uE916" : _timer.Kind == TimerKind.Pomodoro ? "\uE7C1" : "\uE823",
                            _timer.Display + (_timer.Running ? "" : L.T(" · пауза")), _timer.Progress, b));
             }
+            if (TasksForPill() is { } tp)
+                lives.Add(("tasks", "\uE73A", L.F("Задачи {0}/{1}", tp.Done, tp.Total), (double)tp.Done / tp.Total, ringBrush));
             if (Shows("apps"))
                 foreach (var (id, text2, ring2) in AppLiveItems())
                     lives.Add((id, "\uE70B", text2, ring2, ringBrush));
@@ -221,6 +223,7 @@ public partial class MainWindow
         if (_slowCount % 900 == 0) _ = _calendar.RefreshAsync();
         TrackHabits();
         TrackUsage();
+        if (_slowCount % 5 == 0) CheckTaskReminders();
         if (_slowCount % 30 == 1) WatchBattery();
         if (_slowCount % 30 == 0 && _settings.CaptureHidden == null)   // NVIDIA's recorder may start later
         {

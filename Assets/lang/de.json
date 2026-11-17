@@ -607,5 +607,13 @@
  "Остров мягко подскажет, когда вы долго за компьютером без перерыва (пауза от 3 минут считается перерывом). Не беспокоит во время фильмов, игр и режима «Не беспокоить».": "Die Insel weist sanft darauf hin, wenn Sie lange ohne Pause am Computer sind (eine Pause ab 3 Minuten zählt). Bei Filmen, Spielen und „Nicht stören“ bleibt sie still.",
  "Пора сделать перерыв": "Zeit für eine Pause",
  "Вы за компьютером уже {0} без перерыва. Отдохните пару минут.": "Sie sind seit {0} ohne Pause am Computer. Ruhen Sie sich ein paar Minuten aus.",
- "сейчас без перерыва: {0}": "jetzt ohne Pause: {0}"
+ "сейчас без перерыва: {0}": "jetzt ohne Pause: {0}",
+ "Задачи": "Aufgaben",
+ "ЗАДАЧИ НА СЕГОДНЯ": "AUFGABEN FÜR HEUTE",
+ "{0} из {1}": "{0} von {1}",
+ "Напишите задачу и нажмите Enter. Время вида 18:30 поставит напоминание.": "Aufgabe eingeben und Enter drücken. Eine Uhrzeit wie 18:30 setzt eine Erinnerung.",
+ "Пока задач нет": "Noch keine Aufgaben",
+ "Убрать выполненные": "Erledigte entfernen",
+ "Задачи {0}/{1}": "Aufgaben {0}/{1}",
+ "Задача": "Aufgabe"
 }

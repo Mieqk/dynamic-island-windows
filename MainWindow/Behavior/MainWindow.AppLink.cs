@@ -25,6 +25,7 @@ public partial class MainWindow
     {
         _bridge.AppNoticed += n => Dispatcher.BeginInvoke(() => OnAppNotice(n));
         _bridge.AppActivityChanged += a => Dispatcher.BeginInvoke(() => OnAppActivity(a));
+        _bridge.TasksSync = req => Dispatcher.Invoke(() => OnTasksSync(req));   // the app waits for the answer
     }
 
     private void OnAppNotice(ClaudeBridge.AppNotice n)
