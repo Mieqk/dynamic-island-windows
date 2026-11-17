@@ -15,8 +15,23 @@ public partial class MainWindow
     private readonly TasksStore _tasks = new();
     private DateTime _tasksFlashUntil;
 
-    /// <summary>The app whose tasks can be mirrored here (see docs/app-bridge.md).</summary>
-    private const string TasksApp = "Daily Note";
+    /// <summary>The app whose tasks are mirrored here: the one that synced last (see docs/app-bridge.md).</summary>
+    private string _tasksApp = "Daily Note";
+
+    private string TasksSignature(DateTime now) =>
+        string.Join("|", _tasks.Today(now).Select(t => t.Id + (t.Done ? "+" : "-") + t.Text));
+
+    /// <summary>A linked app sent its list for today: mirror it and answer with what was done here meanwhile.</summary>
+    private IReadOnlyList<TaskAction> OnTasksSync(ClaudeBridge.TasksSyncRequest req)
+    {
+        if (!Shows("apps") || !Shows("tasks")) return [];   // switched off in "what the island shows"
+        var now = DateTime.Now;
+        string before = TasksSignature(now);
+        var actions = _tasks.Sync(req.App, req.Day, req.Tasks, now);
+        _tasksApp = req.App;
+        if (TasksSignature(now) != before) TasksChanged();   // changed in the app: redraw, and the pill shows the progress
+        return actions;
+    }
 
     private void RenderTasks()
     {
@@ -115,7 +130,7 @@ public partial class MainWindow
         e.Handled = true;
         var now = DateTime.Now;
         // while the linked app is in touch, new tasks go to it (and so appear in both places)
-        if (_tasks.Add(NewTaskBox.Text, now, _tasks.IsLinked(TasksApp, now) ? TasksApp : "") == null) return;
+        if (_tasks.Add(NewTaskBox.Text, now, _tasks.IsLinked(_tasksApp, now) ? _tasksApp : "") == null) return;
         NewTaskBox.Clear();
         TasksChanged();
     }

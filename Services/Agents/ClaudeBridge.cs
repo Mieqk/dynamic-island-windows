@@ -76,6 +76,12 @@ public sealed class ClaudeBridge
     /// </summary>
     public sealed record AppActivity(string App, string Id, string Text, double Progress, long EndsAtMs, double DurationSec, int TtlSec, bool Clear);
 
+    /// <summary>Another app sends its task list for a day and gets back what was done on the island (see TasksStore.Sync).</summary>
+    public sealed record TasksSyncRequest(string App, string Day, IReadOnlyList<ExternalTask> Tasks);
+
+    /// <summary>Set by the window: mirrors the list and returns the queued changes. Called on a background thread.</summary>
+    public Func<TasksSyncRequest, IReadOnlyList<TaskAction>>? TasksSync { get; set; }
+
     private HttpListener? _listener;
 
     /// <summary>Raised on a background thread.</summary>
@@ -195,6 +201,13 @@ public sealed class ClaudeBridge
                         (int)Math.Clamp(Num(json, "ttlSec", 600), 5, 3600), json["clear"] is JsonValue c && c.TryGetValue<bool>(out var b) && b));
                     break;
                 }
+                case "/app/tasks/sync":
+                {
+                    var sync = ParseTasksSync(json);
+                    if (sync == null || TasksSync == null) break;
+                    response = TasksSyncResponse(TasksSync(sync));
+                    break;
+                }
                 case "/notify":
                 {
                     var evt = json["hook_event_name"]?.GetValue<string>() ?? "";
@@ -229,6 +242,34 @@ public sealed class ClaudeBridge
     /// <summary>A string field, cut to <paramref name="max"/> characters; null when absent or not a string.</summary>
     private static string? Str(JsonObject o, string key, int max) =>
         o[key] is JsonValue v && v.TryGetValue<string>(out var s) ? (s.Length > max ? s[..max] : s) : null;
+
+    /// <summary>The body of /app/tasks/sync: {"app","day":"yyyy-MM-dd","tasks":[{"id","text","done"}]}. Null when there is no day.</summary>
+    internal static TasksSyncRequest? ParseTasksSync(JsonObject json)
+    {
+        var day = Str(json, "day", 10);
+        if (string.IsNullOrWhiteSpace(day)) return null;
+        var tasks = new List<ExternalTask>();
+        if (json["tasks"] is JsonArray array)
+            foreach (var node in array)
+            {
+                if (tasks.Count >= TasksStore.MaxTasks) break;
+                if (node is not JsonObject o) continue;
+                var id = Str(o, "id", 80);
+                var text = Str(o, "text", TasksStore.MaxText);
+                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(text)) continue;
+                tasks.Add(new ExternalTask(id, text, o["done"] is JsonValue v && v.TryGetValue<bool>(out var done) && done));
+            }
+        return new TasksSyncRequest(Str(json, "app", 40) ?? "App", day, tasks);
+    }
+
+    /// <summary>The answer of /app/tasks/sync: {"actions":[{"type":"toggle","id","done"} | {"type":"add","text","done"}]}.</summary>
+    internal static string TasksSyncResponse(IReadOnlyList<TaskAction> actions)
+    {
+        var array = new JsonArray();
+        foreach (var a in actions)
+            array.Add(new JsonObject { ["type"] = a.Type, ["id"] = a.Id, ["text"] = a.Text, ["done"] = a.Done });
+        return new JsonObject { ["actions"] = array }.ToJsonString();
+    }
 
     /// <summary>A countdown end (unix ms) is used only within a day of now; anything else (0, garbage, year 9999) means "none".</summary>
     internal static long SaneEndsAt(double unixMs, DateTimeOffset now)
