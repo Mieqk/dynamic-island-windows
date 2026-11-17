@@ -1,9 +1,11 @@
 {
   "name": "atoll-browser-extension",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Atoll browser extension: LanguageTool check and notes for the island. No dependencies.",
-  "scripts": { "test": "node --test test/*.test.mjs",
-    "e2e": "node test/e2e.mjs" }
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "e2e": "node test/e2e.mjs"
+  }
 }
