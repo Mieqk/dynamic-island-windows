@@ -17,6 +17,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
+  // some browsers do not pass the tab to a keyboard command: take the active one
+  tab ??= (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
+  if (!tab) return;
   const text = await selectionOf(tab);
   if (command === 'check-selection') await runCheck(tab, text);
   if (command === 'save-note') await runNote(tab, text);
